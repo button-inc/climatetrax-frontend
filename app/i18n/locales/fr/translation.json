@@ -1,0 +1,8 @@
+{
+  "hi": "FR Hello, Fallback!",
+  "html": {
+    "description": "FR TO DO",
+    "title": "ClimateTrax"
+  },
+  "msg": "FR Welcome! This is a fallback message common to all fr languages"
+}

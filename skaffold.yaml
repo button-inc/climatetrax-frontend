@@ -1,0 +1,15 @@
+apiVersion: skaffold/v4beta4
+kind: Config
+metadata:
+  name: climatetrax-docker-k-s
+build:
+  artifacts:
+    - image: climatetrax-nextjs-docker-image
+      docker:
+        dockerfile: Dockerfile
+  tagPolicy:
+    sha256: {}
+manifests:
+  rawYaml:
+    - kubernetes-manifests/nextjs-app-deployment.yaml
+    - kubernetes-manifests/nextjs-app-service.yaml
