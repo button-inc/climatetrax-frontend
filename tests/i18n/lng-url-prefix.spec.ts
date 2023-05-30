@@ -1,7 +1,6 @@
 import { test, expect, chromium } from '@playwright/test';
 import { fallbackLng } from "../../app/i18n/settings";
-
-const siteUrl = 'http://localhost:3000';
+import { EN_WELCOME_MSG, FR_WELCOME_MSG, enUrls, frUrls, siteUrl } from './testUtils';
 
 /*
 Ensure that URLs without a language prefix redirects to 
@@ -50,14 +49,8 @@ Verify that accessing URLs with different supported language prefixes
 (e.g., /en/, /en-CA/, /en-GB/, en-US/,/fr/, /fr-CA/) 
 displays the corresponding content in the respective language.
 */
-const EN_WELCOME_MSG = 'Welcome! This is a fallback message common to all en languages';
-const FR_WELCOME_MSG = 'FR Welcome! This is a fallback message common to all fr languages';
 
-[ siteUrl + "/en/",
-  siteUrl + "/en-CA/",
-  siteUrl + "/en-GB/",
-  siteUrl + "/en-US/"
-].forEach(url => {
+enUrls.forEach(url => {
   test(`should contain the correct message for English at ${url}`, async ({ page }) => {
     await page.goto(url);
     const pageContent = await page.textContent('body');
@@ -65,9 +58,7 @@ const FR_WELCOME_MSG = 'FR Welcome! This is a fallback message common to all fr 
   });
 });
 
-[ siteUrl + "/fr/",
-  siteUrl + "/fr-CA/"
-].forEach(url => {
+frUrls.forEach(url => {
   test(`should contain the correct message for French at ${url}`, async ({ page }) => {
     await page.goto(url);
     const pageContent = await page.textContent('body');
