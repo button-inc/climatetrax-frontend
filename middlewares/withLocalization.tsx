@@ -25,10 +25,11 @@ export const withLocalization: MiddlewareFactory = (next) => {
     //2️⃣ Check i18n Cookie for Language
     if (!lng) {
       const cookieStore = request.cookies;
-      // 👇️ validate the language is supported from the accepted languages
-      lng = cookieStore.has(cookieName)
-        ? acceptLanguage.get(cookieStore.get(cookieName)?.value)
-        : null;
+      const cookieLng = cookieStore.get(cookieName)?.value;
+      // Validate the language is supported from the accepted languages
+      if (cookieLng && languages.includes(cookieLng)) {
+        lng = acceptLanguage.get(cookieLng);
+      }
     }
 
     //3️⃣ Check Accept-Language Header

@@ -2,6 +2,8 @@ import { test, expect, chromium } from '@playwright/test';
 import { fallbackLng } from "../../app/i18n/settings";
 import { lngs, siteUrl } from './testUtils';
 
+const cookieName = "i18next";
+
 for (const language of lngs) {
   test(`Check that accessing URL with ${language} prefix 
   sets the i18next language preference cookie`, async ({ page }) => {
@@ -142,7 +144,7 @@ test(`Invalid i18next cookie should use Accept-Language header`, async () => {
 
   // Create a new context with the Accept-Language header set to 'fr-CA'
   const context = await browser.newContext({
-    locale: 'fr'
+    locale: 'fr-CA'
   });
 
   // Create a new page in this context
@@ -150,10 +152,10 @@ test(`Invalid i18next cookie should use Accept-Language header`, async () => {
 
   // Set invalid 'i18next' cookie
   await context.addCookies([{
-    name: 'i18next',
+    name: cookieName,
     value: 'unsupported-language',
     url: siteUrl,
-  }]);
+  }]); 
 
   // Navigate to the page without language prefix
   await page.goto(siteUrl);
@@ -179,7 +181,7 @@ test(`Conflict between i18next cookie and Accept-Language header should prioriti
 
   // Set 'i18next' cookie to 'en'
   await context.addCookies([{
-    name: 'i18next',
+    name: cookieName,
     value: 'en',
     url: siteUrl,
   }]);
