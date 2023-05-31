@@ -4,11 +4,11 @@ import { lngs, siteUrl } from './testUtils';
 
 const cookieName = "i18next";
 
-for (const language of lngs) {
-  test(`Check that accessing URL with ${language} prefix 
+for (const lng of lngs) {
+  test(`Check that accessing URL with ${lng} prefix 
   sets the i18next language preference cookie`, async ({ page }) => {
     // Go to the page with language prefix
-    await page.goto(`${siteUrl}/${language}`);
+    await page.goto(`${siteUrl}/${lng}`);
   
     // Get cookies
     const cookies = await page.context().cookies();
@@ -18,19 +18,19 @@ for (const language of lngs) {
 
     // Assert that the cookie exists and its value matches the language prefix
     expect(i18nCookie).toBeTruthy();
-    expect(i18nCookie?.value).toBe(language);
+    expect(i18nCookie?.value).toBe(lng);
   });
 }
 
 
-for (const language of lngs) {
+for (const lng of lngs) {
   test(`Ensure i18next language preference cookie is set and 
   verify that a URL, without language prefix, 
-  displays content in the i18next language preference: ${language}`, async ({ page }) => {
+  displays content in the i18next language preference: ${lng}`, async ({ page }) => {
     // Set i18next cookie
     await page.context().addCookies([{
       name: 'i18next',
-      value: language,
+      value: lng,
       url: siteUrl,
     }]);
     
@@ -38,7 +38,7 @@ for (const language of lngs) {
     await page.goto(siteUrl);
     
     // Check that the page URL matches the expected language URL
-    expect(page.url()).toContain(`/${language}`);
+    expect(page.url()).toContain(`/${lng}`);
 
     // Get cookies
     const cookies = await page.context().cookies();
@@ -47,21 +47,21 @@ for (const language of lngs) {
 
     // Assert that the cookie exists and its value matches the language
     expect(i18nCookie).toBeTruthy();
-    expect(i18nCookie?.value).toBe(language);
+    expect(i18nCookie?.value).toBe(lng);
   });
 }
 
-for (const language of lngs) {
+for (const lng of lngs) {
   test(`Clear the cookie and 
   ensure that a url, without language prefix, 
   sets the i18next language preference cookie to 
-  the value of the Accept-Language header default language: ${language}`, async () => {
+  the value of the Accept-Language header default language: ${lng}`, async () => {
     // Launch browser
     const browser = await chromium.launch();
 
     // Create a new context with the Accept-Language header set to the current language
     const context = await browser.newContext({
-      locale: language
+      locale: lng
     });
 
     // Create a new page in this context
@@ -77,7 +77,7 @@ for (const language of lngs) {
 
     // Assert that the cookie exists and its value matches the language
     expect(i18nCookie).toBeTruthy();
-    expect(i18nCookie?.value).toBe(language);
+    expect(i18nCookie?.value).toBe(lng);
 
     // Close the browser at the end of the test
     await browser.close();
