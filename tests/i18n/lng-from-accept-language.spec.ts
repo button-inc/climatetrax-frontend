@@ -95,5 +95,5 @@ test(`Page should display content in highest priority language from Accept-Langu
   await expect(page).toHaveURL(new RegExp(`.*/${highestPriorityLanguage}/?`));
 
   // Close the browser at the end of the test
-  // await browser.close();
+  await browser.close();
 });

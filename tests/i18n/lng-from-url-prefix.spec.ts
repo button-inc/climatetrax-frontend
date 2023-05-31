@@ -28,6 +28,8 @@ test('should redirect to the default language based on Accept-Language header', 
 /*
 Ensure that URLs without a language prefix redirects to the i18next default language when 
 the Accept-Language header is NOT available or NOT supported by our i18next languages.
+Verify that request with no language prefix, no i18next cookie value and unsupported or 
+unrecognized language codes in the accept-language header fall back to the i18next default language.
 */
 test('should redirect to the i18next default language when Accept-Language is not available or unsupported', async () => {
   const browser = await chromium.launch();
@@ -49,7 +51,6 @@ Verify that accessing URLs with different supported language prefixes
 (e.g., /en/, /en-CA/, /en-GB/, en-US/,/fr/, /fr-CA/) 
 displays the corresponding content in the respective language.
 */
-
 enUrls.forEach(url => {
   test(`should contain the correct message for English at ${url}`, async ({ page }) => {
     await page.goto(url);
