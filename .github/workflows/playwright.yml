@@ -1,7 +1,10 @@
-name: Playwright Tests
-run-name: ${{ github.actor }} is running Playwright Tests
+name: Playwright Tests by 
 
 on: [push]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
