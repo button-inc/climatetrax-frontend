@@ -1,5 +1,4 @@
 name: Playwright Tests
-
 run-name: ${{ github.actor }} is running Playwright Tests
 
 on: [push]
@@ -10,14 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install pnpm
+      run: npm install -g pnpm
+
+    - name: Cache dependencies
+      uses: actions/setup-node@v3
       with:
         node-version: 16
         cache: 'pnpm'
-    - name: Install pnpm
-      run: npm install -g pnpm
+
     - name: Install dependencies
       run: pnpm install
+
     - name: Install Playwright Browsers
       run: pnpm exec playwright install --with-deps
 
