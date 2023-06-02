@@ -1,8 +1,6 @@
 import { test, expect, chromium } from "@playwright/test";
-import { lngs, siteUrl } from "./testUtils";
+import { createPageWithAcceptLanguage, lngs, siteUrl } from "./testUtils";
 
-const acceptLanguages =
-  "en;q=0.1, en-CA;q=0.2, en-GB;q=0.3, en-US;q=0.4, fr;q=0.5, fr-CA;q=1.0";
 
 // Language Redirection Tests
 test.describe("Accept-Language Language Redirection", () => {
@@ -42,8 +40,7 @@ test.describe("Accept-Language Language Redirection", () => {
   for (const lng of lngs) {
     test(`Page should redirect to ${lng} version when Accept-Language is set to "${lng}"`, async () => {
       // Create a new browser context for each test with desired locale
-      context = await browser.newContext({ locale: lng });
-      page = await context.newPage();
+      const { page } = await createPageWithAcceptLanguage(lng);
 
       // Navigate to the site URL
       await page.goto(siteUrl);
@@ -56,7 +53,7 @@ test.describe("Accept-Language Language Redirection", () => {
   // Test language redirection for multiple languages in Accept-Language header
   test(`Page should redirect to highest priority language when multiple languages are set in Accept-Language header`, async () => {
     // Create a new browser context for each test with desired locale
-    context = await browser.newContext({ locale: acceptLanguages });
+    context = await browser.newContext({ locale: "en;q=0.1, en-CA;q=0.2, en-GB;q=0.3, en-US;q=0.4, fr;q=0.5, fr-CA;q=1.0" });
     page = await context.newPage();
 
     // Navigate to the site URL

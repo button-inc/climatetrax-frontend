@@ -1,5 +1,5 @@
 import { test, expect, chromium, Browser, BrowserContext, Page } from '@playwright/test';
-import { lngs,siteUrl} from './testUtils';
+import { createPageWithAcceptLanguage, lngs,siteUrl} from './testUtils';
 
 async function createPage(): Promise<{ browser: Browser; context: BrowserContext; page: Page }> {
   const browser = await chromium.launch();
@@ -53,10 +53,7 @@ test.describe("Default Language Redirection", () => {
   });
 
   test(`URL prefix takes precedence over Accept-Language header`, async () => {
-    const context = await browser.newContext({
-      locale: "en-GB",
-    });
-    const page = await context.newPage();
+    const { page } = await createPageWithAcceptLanguage("en-GB");
     await page.goto(`${siteUrl}/fr-CA`);
     await expect(page).toHaveURL(`${siteUrl}/fr-CA`);
   });

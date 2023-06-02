@@ -3,17 +3,11 @@ import { fallbackLng } from "../../app/i18n/settings";
 import {
   EN_WELCOME_MSG,
   FR_WELCOME_MSG,
+  createPageWithAcceptLanguage,
   enUrls,
   frUrls,
   siteUrl,
 } from "./testUtils";
-
-async function createPageWithAcceptLanguage(locale: string = ''): Promise<{ browser: Browser; context: BrowserContext; page: Page; }> {
-  const browser = await chromium.launch();
-  const context = await browser.newContext({ locale: locale });
-  const page = await context.newPage();
-  return { browser, context, page };
-}
 
 test.describe("URL Prefix Language Redirection", () => {
   let browser: Browser;
