@@ -1,105 +1,62 @@
-import { test, expect, chromium } from '@playwright/test';
+import { test, expect, chromium, Browser, BrowserContext, Page } from "@playwright/test";
 import { fallbackLng } from "../../app/i18n/settings";
-import { EN_WELCOME_MSG, FR_WELCOME_MSG, enUrls, frUrls, siteUrl } from './testUtils';
+import {
+  EN_WELCOME_MSG,
+  FR_WELCOME_MSG,
+  enUrls,
+  frUrls,
+  siteUrl,
+} from "./testUtils";
 
-/*
-Ensure that URLs without a language prefix redirects to 
-the Accept-Language header default language, 
-if available and if supported by our i18next languages.
-*/
-test('should redirect to the default language based on Accept-Language header', async () => {
+async function createPageWithAcceptLanguage(locale: string = ''): Promise<{ browser: Browser; context: BrowserContext; page: Page; }> {
   const browser = await chromium.launch();
-  /*
-  The Playwright newContext method allows setting a locale, 
-  which will be sent as the Accept-Language HTTP header in the requests.
-  */
-  const context = await browser.newContext({
-    locale: 'fr-CA', // setting French Canadian as the default language Accept-Language
-  });
-  
+  const context = await browser.newContext({ locale: locale });
   const page = await context.newPage();
-  await page.goto(siteUrl);
+  return { browser, context, page };
+}
 
-  await expect(page).toHaveURL(/.*fr-CA/);
+test.describe("URL Prefix Language Redirection", () => {
+  let browser: Browser;
 
-  //await browser.close();
-});
-
-/*
-Ensure that URLs without a language prefix redirects to the i18next default language when 
-the Accept-Language header is NOT available or NOT supported by our i18next languages.
-Verify that request with no language prefix, no i18next cookie value and unsupported or 
-unrecognized language codes in the accept-language header fall back to the i18next default language.
-*/
-test('should redirect to the i18next default language when Accept-Language is not available or unsupported', async () => {
-  const browser = await chromium.launch();
-  const context = await browser.newContext({
-    locale: 'unsupported-locale', // set to an unsupported language locale
+  test.beforeAll(async () => {
+    browser = await chromium.launch();
   });
 
-  const page = await context.newPage();
-  await page.goto(siteUrl); 
+  test.afterAll(async () => {
+    await browser.close();
+  });
 
-  // Check if the URL now includes the i18next default language prefix after redirection
-  expect(page.url()).toContain(siteUrl + "/" + fallbackLng);
+  test("should redirect to the i18next default language when Accept-Language is not available or unsupported", async () => {
+    const { page } = await createPageWithAcceptLanguage('unsupported-locale');
+    await page.goto(siteUrl);
+    expect(page.url()).toContain(`${siteUrl}/${fallbackLng}`);
+  });
 
-});
+  for (const url of enUrls) {
+    test(`should contain the correct message for English at ${url}`, async ({ page }) => {
+      await page.goto(url);
+      const pageContent = await page.textContent("body");
+      expect(pageContent).toContain(EN_WELCOME_MSG);
+    });
+  }
 
+  for (const url of frUrls) {
+    test(`should contain the correct message for French at ${url}`, async ({ page }) => {
+      await page.goto(url);
+      const pageContent = await page.textContent("body");
+      expect(pageContent).toContain(FR_WELCOME_MSG);
+    });
+  }
 
-/*
-Verify that accessing URLs with different supported language prefixes 
-(e.g., /en/, /en-CA/, /en-GB/, en-US/,/fr/, /fr-CA/) 
-displays the corresponding content in the respective language.
-*/
-enUrls.forEach(url => {
-  test(`should contain the correct message for English at ${url}`, async ({ page }) => {
-    await page.goto(url);
-    const pageContent = await page.textContent('body');
-    expect(pageContent).toContain(EN_WELCOME_MSG);
+  test(`Unsupported language prefix defaults to Accept-Language header value`, async () => {
+    const { page } = await createPageWithAcceptLanguage('fr-CA');
+    await page.goto(`${siteUrl}/unsupported-lng/`);
+    await expect(page).toHaveURL(/.*fr-CA/);
+  });
+
+  test(`Unsupported language prefix defaults to i18next default language`, async () => {
+    const { page } = await createPageWithAcceptLanguage('unsupported-locale');
+    await page.goto(`${siteUrl}/unsupported-lng/`);
+    expect(page.url()).toContain(`${siteUrl}/${fallbackLng}`);
   });
 });
-
-frUrls.forEach(url => {
-  test(`should contain the correct message for French at ${url}`, async ({ page }) => {
-    await page.goto(url);
-    const pageContent = await page.textContent('body');
-    expect(pageContent).toContain(FR_WELCOME_MSG);
-  });
-});
-
-/*Test different scenarios of invalid or unsupported language prefixes 
-displays content based on i18next or supported Accept-Language Header value, 
-or i18next default language. */
-test(`Unsupported language prefix defaults to Accept-Language header value`, async () => {
-  const browser = await chromium.launch();
-  const context = await browser.newContext({
-    locale: 'fr-CA', 
-  });
-  
-  const page = await context.newPage();
-
-  await page.goto(siteUrl + '/unsupported-lng/');
-  await expect(page).toHaveURL(/.*fr-CA/);
-});
-
-test(`Unsupported language prefix defaults to i18next default language`, async () => {
-  const browser = await chromium.launch();
-  const context = await browser.newContext({
-    locale: 'unsupported-locale', 
-  });
-  
-  const page = await context.newPage();
-
-  await page.goto(siteUrl + '/unsupported-lng/');
-  expect(page.url()).toContain(siteUrl + "/" + fallbackLng);
-});
-
-
-
-
-
-
-
-
-
-
