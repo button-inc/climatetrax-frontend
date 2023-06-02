@@ -1,101 +1,63 @@
-import { test, expect, chromium } from '@playwright/test';
-import { fallbackLng } from "../../app/i18n/settings";
-import { EN_WELCOME_MSG, FR_WELCOME_MSG, enUrls, frUrls, lngs, siteUrl } from './testUtils';
+import { test, expect, chromium, Browser, BrowserContext, Page } from '@playwright/test';
+import { lngs,siteUrl} from './testUtils';
 
-/*
-Verify that the server responds with the correct Content-Language header 
-in the HTTP response based on the requested page's determined language.
-*/
-for (const lng of lngs) {
-  test(`Server should respond with correct Content-Language: ${lng}`, async () => {
-    // Launch browser
-    const browser = await chromium.launch();
-
-    // Create a new context
-    const context = await browser.newContext();
-
-    // Create a new page in this context
-    const page = await context.newPage();
-
-    // Navigate to the page with the current language prefix
-    await page.goto(`${siteUrl}/${lng}`);
-
-    // Fetch the same URL to verify the response headers
-    const response = await page.goto(`${siteUrl}/${lng}`);
-    
-    // Expect Content-Language header to match the requested language
-    expect(response?.headers()['content-language']).toBe(lng);
-
-    // Close the browser at the end of the test
-    await browser.close();
-  });
+async function createPage(): Promise<{ browser: Browser; context: BrowserContext; page: Page }> {
+  const browser = await chromium.launch();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  return { browser, context, page };
 }
 
-/*
-This test case verifies that even if there is an i18next cookie 
-with a language value set, accessing a URL with a different language prefix should 
-display the content in the language of the URL prefix.
-*/
-test(`URL prefix takes precedence over i18next cookie value`, async () => {
-  // Launch browser
-  const browser = await chromium.launch();
+test.describe("Default Language Redirection", () => {
+  let browser: Browser;
+  let context: BrowserContext;
+  let page: Page;
 
-  // Create a new context
-  const context = await browser.newContext();
-
-  // Create a new page in this context
-  const page = await context.newPage();
-
-  // Set 'i18next' cookie to 'en-GB'
-  await context.addCookies([{
-    name: 'i18next',
-    value: 'en-GB',
-    url: siteUrl,
-  }]);
-
-  // Navigate to the page with language prefix 'fr-CA'
-  await page.goto(`${siteUrl}/fr-CA`);
-
-  // Expect URL to stay as '/fr-CA/' indicating that French Canadian language is being used
-  await expect(page).toHaveURL(`${siteUrl}/fr-CA`);
-
-  // Close the browser at the end of the test
-  await browser.close();
-});
-
-/*
-This test case verifies that even if the Accept-Language header in
- the request is set to a specific language, accessing 
- a URL with a different language prefix should display the content in the language of the URL prefix.
- */
-test(`URL prefix takes precedence over Accept-Language header`, async () => {
-  // Launch browser
-  const browser = await chromium.launch();
-
-  // Create a new context with the Accept-Language header set to 'en-GB'
-  const context = await browser.newContext({
-    locale: 'en-GB'
+  test.beforeAll(async () => {
+    const { browser: launchedBrowser } = await createPage();
+    browser = launchedBrowser;
   });
 
-  // Create a new page in this context
-  const page = await context.newPage();
+  test.beforeEach(async () => {
+    const { context: createdContext, page: createdPage } = await createPage();
+    context = createdContext;
+    page = createdPage;
+  });
 
-  // Navigate to the page with language prefix 'fr-CA'
-  await page.goto(`${siteUrl}/fr-CA`);
+  test.afterEach(async () => {
+    await page.close();
+    await context.close();
+  });
 
-  // Expect URL to stay as '/fr-CA/' indicating that French Canadian language is being used
-  await expect(page).toHaveURL(`${siteUrl}/fr-CA`);
+  test.afterAll(async () => {
+    await browser.close();
+  });
 
-  // Close the browser at the end of the test
-  await browser.close();
+  for (const lng of lngs) {
+    test(`Server should respond with correct Content-Language: ${lng}`, async () => {
+      const response = await page.goto(`${siteUrl}/${lng}`);
+      expect(response?.headers()["content-language"]).toBe(lng);
+    });
+  }
+
+  test(`URL prefix takes precedence over i18next cookie value`, async () => {
+    await context.addCookies([
+      {
+        name: "i18next",
+        value: "en-GB",
+        url: siteUrl,
+      },
+    ]);
+    await page.goto(`${siteUrl}/fr-CA`);
+    await expect(page).toHaveURL(`${siteUrl}/fr-CA`);
+  });
+
+  test(`URL prefix takes precedence over Accept-Language header`, async () => {
+    const context = await browser.newContext({
+      locale: "en-GB",
+    });
+    const page = await context.newPage();
+    await page.goto(`${siteUrl}/fr-CA`);
+    await expect(page).toHaveURL(`${siteUrl}/fr-CA`);
+  });
 });
-
-
-
-
-
-
-
-
-
-
