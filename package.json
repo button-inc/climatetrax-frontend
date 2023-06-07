@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "playwright test",
-    "test:i18n": "playwright test --grep=i18n"
+    "k8s": "minikube start && scripts/k8s-secrets.sh  && scripts/k8s-launch.sh"
   },
   "dependencies": {
     "@types/node": "20.2.0",
@@ -18,10 +17,11 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
-    "i18next": "^22.5.0",
+    "i18next": "^22.5.1",
     "i18next-browser-languagedetector": "7.0.1",
     "i18next-resources-to-backend": "1.1.3",
     "next": "13.4.3",
+    "next-auth": "^4.22.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",

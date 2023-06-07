@@ -4,12 +4,12 @@ metadata:
   name: climatetrax-docker-k-s
 build:
   artifacts:
-    - image: climatetrax-nextjs-docker-image
+    - image: nextjs-docker-image
       docker:
         dockerfile: Dockerfile
   tagPolicy:
     sha256: {}
 manifests:
   rawYaml:
-    - kubernetes-manifests/nextjs-app-deployment.yaml
-    - kubernetes-manifests/nextjs-app-service.yaml
+    - kubernetes/nextjs-app-deployment.yaml
+    - kubernetes/nextjs-app-service.yaml

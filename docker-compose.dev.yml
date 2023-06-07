@@ -1,11 +1,13 @@
 version: "3"
-
 services:
-  my-nextjs-app-image:
+  nextjs-docker-image:
     container_name: climatetrax_dev
     build:
       context: .
       dockerfile: Dockerfile
-      target: dev
+    image: nextjs-docker-image:latest
     ports:
       - 3000:3000
+    volumes:
+      - .:/usr/src/app
+
