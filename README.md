@@ -154,3 +154,21 @@ docker compose -f docker-compose.dev.yml up -d
 
 - Launch "Cloud "Code" from the right-hand status bar
 - Select "Run on Kubernetes" in the display prompt
+
+## run tests
+1. Start the dev server:
+
+```
+pnpm run dev
+
+```
+2.a launch playwright for tests:
+
+```
+pnpm run test
+```
+2.b launch playwright for i18next tests:
+
+```
+pnpm run test:i18n
+```
