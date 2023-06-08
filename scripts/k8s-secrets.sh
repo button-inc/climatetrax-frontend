@@ -43,12 +43,12 @@ for secret_name in "${SECRET_NAMES[@]}"; do
   # Convert secret name to lowercase and replace underscores with hyphens
   secret_name_lower=$(echo "$secret_name" | tr '[:upper:]' '[:lower:]' | tr '_' '-')
 
-  # Get the secret value from GCP Secret Manager
-  secret_value=$(gcloud secrets versions access latest --secret="$secret_name" 2>/dev/null || handle_error "Failed to retrieve secret $secret_name")
-
   # If the secret name is "eed-nextauth-url", set it to "http://localhost:4503/"
-  if [[ "$secret_name" == "eed-nextauth-url" ]]; then
+  if [[ "$secret_name" == "eed_nextauth_url" ]]; then
     secret_value="http://localhost:4503/"
+  else
+    # Get the secret value from GCP Secret Manager
+    secret_value=$(gcloud secrets versions access latest --secret="$secret_name" 2>/dev/null || handle_error "Failed to retrieve secret $secret_name")
   fi
 
   # Create or update the Kubernetes secret
