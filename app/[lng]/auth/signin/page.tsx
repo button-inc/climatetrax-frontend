@@ -3,7 +3,7 @@ import { getProviders, signIn, ClientSafeProvider } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { useTranslation } from "@/i18n/client";
-
+import { useRouter } from 'next/router';
 
 export default function Page() {
   const { t } = useTranslation("translation");
@@ -21,13 +21,8 @@ export default function Page() {
   }, []);
 
   // 👇️ render the providers as login buttons
-  let callbackUrl = process.env.NEXTAUTH_CALLBACK_URL;
-  if (typeof window !== 'undefined') {
-    callbackUrl = callbackUrl || window.location.origin;
-  }
-  
-  // Use the `callbackUrl` variable in your client-side code
-  
+  const router = useRouter();
+  const callbackUrl = process.env.NEXTAUTH_CALLBACK_URL || router?.basePath ? `${router.basePath}` : 'http://localhost:3000';   
   const content = data
     ? Object.values(data).map((provider: ClientSafeProvider) => (
         <div key={provider.id} className={styles.provider}>
