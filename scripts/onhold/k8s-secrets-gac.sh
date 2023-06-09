@@ -9,7 +9,7 @@ PROJECT_ID="emissions-elt-demo"
 NAMESPACE="default"
 
 # Set the secret names
-SECRET_NAMES=("eed_nextauth_google_client_id" "eed_nextauth_google_client_secret" "eed_nextauth_callback_url" "eed_nextauth_secret" "eed_nextauth_url")
+SECRET_NAMES=("eed_nextauth_google_client_id" "eed_nextauth_google_client_secret" "eed_nextauth_secret" "eed_nextauth_url")
 
 # Authenticate to GCP using GOOGLE_APPLICATION_CREDENTIALS
 authenticate() {

@@ -21,7 +21,13 @@ export default function Page() {
   }, []);
 
   // 👇️ render the providers as login buttons
-  const callbackUrl = process.env.NEXTAUTH_CALLBACK_URL ||  "http://localhost:3000"; 
+  let callbackUrl = process.env.NEXTAUTH_CALLBACK_URL;
+  if (typeof window !== 'undefined') {
+    callbackUrl = callbackUrl || window.location.origin;
+  }
+  
+  // Use the `callbackUrl` variable in your client-side code
+  
   const content = data
     ? Object.values(data).map((provider: ClientSafeProvider) => (
         <div key={provider.id} className={styles.provider}>
