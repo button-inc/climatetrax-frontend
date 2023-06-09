@@ -40,8 +40,14 @@ spec:
                 secretKeyRef:
                   name: eed-nextauth-secret
                   key: eed-nextauth-secret
+            - name: NEXTAUTH_CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: eed-nextauth-callback-url
+                  key: eed-nextauth-callback-url
             - name: NEXTAUTH_URL
               valueFrom:
                 secretKeyRef:
                   name: eed-nextauth-url
                   key: eed-nextauth-url
+

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { useTranslation } from "@/i18n/client";
 
+
 export default function Page() {
   const { t } = useTranslation("translation");
   const [data, setData] = useState<Record<string, ClientSafeProvider> | null>(
@@ -20,7 +21,7 @@ export default function Page() {
   }, []);
 
   // 👇️ render the providers as login buttons
-  const callbackUrl = process.env.NEXTAUTH_URL || "http://localhost:3000/";
+  const callbackUrl = process.env.NEXTAUTH_CALLBACK_URL ||  "http://localhost:3000"; 
   const content = data
     ? Object.values(data).map((provider: ClientSafeProvider) => (
         <div key={provider.id} className={styles.provider}>

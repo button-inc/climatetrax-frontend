@@ -37,6 +37,9 @@ dependencies:
   next-auth:
     specifier: ^4.22.1
     version: 4.22.1(next@13.4.3)(react-dom@18.2.0)(react@18.2.0)
+  next-runtime-dotenv:
+    specifier: ^1.5.1
+    version: 1.5.1(next@13.4.3)
   postcss:
     specifier: 8.4.23
     version: 8.4.23
@@ -832,6 +835,11 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
+    dev: false
+
+  /dotenv@16.1.4:
+    resolution: {integrity: sha512-m55RtE8AsPeJBpOIFKihEmqUcoVncQIwo7x9U8ZwLEZw9ZpXboz2c+rvog+jUaJvVrZ5kBOeYQBX5+8Aa/OZQw==}
+    engines: {node: '>=12'}
     dev: false
 
   /electron-to-chromium@1.4.424:
@@ -1965,6 +1973,15 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       uuid: 8.3.2
+    dev: false
+
+  /next-runtime-dotenv@1.5.1(next@13.4.3):
+    resolution: {integrity: sha512-G1NWW06geegqev1U3E90lfYYMV+xvVIwyQv2KbQCRp03jSdUbRANcEm/QQnNoJqEGQUXoEgYDdSV6jB0yv/xAQ==}
+    peerDependencies:
+      next: '>= 5.1.0'
+    dependencies:
+      dotenv: 16.1.4
+      next: 13.4.3(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /next@13.4.3(react-dom@18.2.0)(react@18.2.0):
