@@ -1,5 +1,6 @@
 import { languages } from "@/i18n/settings";
 import { useTranslation } from "@/i18n";
+import DefaultLayout from "@/components/layout/DefaultLayout";
 /*
 📌 pre v13 pages/_app.js and pages/_document.js have been replaced with v13 app/layout.js root layout
 Good to know:
@@ -38,9 +39,9 @@ export default async function RootLayout({
 
       <body>
         {
-          //👇️ TO DO: DefaultLayout wraps client-side providers
+          //👇️ DefaultLayout wraps client-side providers
         }
-        {children}
+        <DefaultLayout>{children}</DefaultLayout>
       </body>
     </html>
   );

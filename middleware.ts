@@ -1,4 +1,5 @@
 import { stackMiddlewares } from "@/middlewares/stackMiddlewares";
+import { withAuthorization } from "@/middlewares/withAuthorization";
 import { withLocalization } from "@/middlewares/withLocalization";
 import { withResponse } from "@/middlewares/withResponse";
 
@@ -38,4 +39,8 @@ export const config = {
     "/((?!_next/static|_next/image|favicon.ico).*)",
   ],
 };
-export default stackMiddlewares([withLocalization, withResponse]);
+export default stackMiddlewares([
+  withLocalization,
+  withAuthorization,
+  withResponse,
+]);

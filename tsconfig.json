@@ -20,11 +20,18 @@
       }
     ],
     "paths": {
+      "api/*": ["./app/api/*"],
       "@/*": ["./*"],
+      "@/components/*": ["./app/components/*"],
       "@/i18n": ["./app/i18n"],
       "@/i18n/*": ["./app/i18n/*"],
-      "@/middlewares": ["./middlewares"]
-    }
+      "@/middlewares": ["./middlewares"],
+      "@/styles/*": ["./app/styles/*"],
+      "@/types/*": ["./app/types/*"],
+      "@/utils/*": ["./app/utils/*"],
+      "@/auth/*": ["./app/$1/auth/*"]
+    },
+    "types": ["next", "next-auth"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

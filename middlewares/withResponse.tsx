@@ -5,8 +5,8 @@ import {
   NextResponse,
 } from "next/server";
 
-import { fallbackLng } from "@/i18n/settings";
 import { MiddlewareFactory } from "./types";
+import { fallbackLng } from "@/i18n/settings";
 const cookieName = "i18next";
 
 // 👇️ return request's response
@@ -26,10 +26,10 @@ export const withResponse: MiddlewareFactory = (next: NextMiddleware) => {
     // 👇️ create response
     const response = NextResponse.next();
 
-    // 🍪 set response cookie with value set in middleware 'withLocalization'- used in i18n libraries
+    // 🍪 cookies: set response cookie with value set in middleware 'withLocalization'- used in i18n libraries
     response.cookies.set(cookieName, lng);
 
-    // “⚽” set response header content language value set in middleware 'withLocalization'- used in i18n libraries
+    // ⚽ headers: set response header content language value set in middleware 'withLocalization'- used in i18n libraries
     response.headers.set("content-language", lng);
 
     return response;

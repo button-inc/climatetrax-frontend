@@ -9,7 +9,7 @@ COPY pnpm-lock.yaml ./
 RUN pnpm install
 
 COPY . .
-COPY .env.dev ./.env
+COPY .env.development ./.env
 
 RUN npm run build
 
@@ -32,4 +32,3 @@ COPY --from=build_dev /app/.next/ ./.next/
 
 # Build the Next.js app
 CMD ["/bin/sh", "-c", "npm start"]
-

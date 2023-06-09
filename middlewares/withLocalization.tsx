@@ -11,6 +11,7 @@ export const withLocalization: MiddlewareFactory = (next) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
     // 1️⃣ Check (valid) Language Prefix in URL
     const { pathname } = request.nextUrl;
+
     //👇️ the first non-empty segment is considered the language prefix
     const [languagePrefix] = pathname.split("/").filter(Boolean);
     // 👇️ validate the language is supported from the accepted languages
@@ -25,11 +26,10 @@ export const withLocalization: MiddlewareFactory = (next) => {
     //2️⃣ Check i18n Cookie for Language
     if (!lng) {
       const cookieStore = request.cookies;
-      const cookieLng = cookieStore.get(cookieName)?.value;
-      // Validate the language is supported from the accepted languages
-      if (cookieLng && languages.includes(cookieLng)) {
-        lng = acceptLanguage.get(cookieLng);
-      }
+      // 👇️ validate the language is supported from the accepted languages
+      lng = cookieStore.has(cookieName)
+        ? acceptLanguage.get(cookieStore.get(cookieName)?.value)
+        : null;
     }
 
     //3️⃣ Check Accept-Language Header

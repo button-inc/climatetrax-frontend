@@ -1,5 +1,10 @@
 {
   "hi": "Hello, Fallback!",
+  "auth": {
+    "error": "Ops, there has been an authentication error.",
+    "signin": "Sign in with:",
+    "signout": "Sign Out"
+  },
   "html": {
     "description": "TO DO",
     "title": "ClimateTrax"
