@@ -1,0 +1,32 @@
+version: '3'
+services:
+  cloudsql-proxy:
+    image: gcr.io/cloudsql-docker/gce-proxy:1.27.0
+    command: /cloud_sql_proxy -instances=${DATABASE_INSTANCE_CONNECTION_NAME}=tcp:0.0.0.0:5432 -credential_file=/config/keycloak-sa-credential.json
+    volumes:
+      - ./keycloak-sa-credential.json:/config/keycloak-sa-credential.json
+    networks:
+      - keycloak-network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:21.1.1
+    command: 
+      - start-dev
+      - --db=postgres
+      - --db-url=jdbc:postgresql://cloudsql-proxy:5432/eed
+      - --db-username=${DB_USERNAME}
+      - --db-password=${DB_PASSWORD}
+      - --db-schema=keycloak
+    environment:
+      - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN}
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
+    ports:
+      - 8080:8080
+    networks:
+      - keycloak-network
+    depends_on:
+      - cloudsql-proxy
+
+networks:
+  keycloak-network:
+    driver: bridge

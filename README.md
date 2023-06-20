@@ -307,3 +307,19 @@ OR (WIP) run a package.json script called "k8s" which will start a minikube, set
 
 The output of `k8s` will be displayed in the terminal to confirm failure or success of setting a Kubernetes secret using shell "scripts\k8s-secrets.sh"; after which, Cloud Code\Run Kubernetes should launch
 
+# Running Keycloak Locally
+## run Docker container
+To run the keycloak auth in a docker container via a docker compose file run command from the directory where `keycloak-docker-compose.yml` file is located.
+
+```
+docker compose  -p climatetrax-keycloak --env-file .env.development -f keycloak-docker-compose.yml up
+
+```
+
+To view Keycloak admin console open a browser at http://localhost:8080/
+
+To stop a local Docker container launched using Docker Compose, you can use Docker Desktop UI or use command from the directory where `keycloak-docker-compose.yml` file is located:
+
+```
+docker compose -p climatetrax-keycloak -f docker-compose.dev.yml down
+```
