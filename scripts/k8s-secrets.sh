@@ -8,7 +8,8 @@ PROJECT_ID="emissions-elt-demo"
 NAMESPACE="default"
 
 # Set the secret names
-SECRET_NAMES=("eed_nextauth_google_client_id" "eed_nextauth_google_client_secret" "eed_nextauth_secret" "eed_nextauth_url")
+SECRET_NAMES=("eed_nextauth_google_client_id" "eed_nextauth_google_client_secret" "eed_nextauth_secret" "eed_nextauth_url" "eed_api_host" "eed_database" "eed_database_host" "eed_database_port" "eed_database_protocol" "eed_database_schema_admin" "eed_database_schema_clean" "eed_database_schema_workspace" "eed_database_user_admin" "eed_database_user_analyst" "eed_database_user_pw_admin" "eed_database_user_pw_analyst" "eed_db_host" "eed_db_pass" "eed_db_user")
+
 
 # Authenticate to GCP using application-default credentials
 authenticate() {
@@ -45,6 +46,8 @@ for secret_name in "${SECRET_NAMES[@]}"; do
   # If the secret name is "eed-nextauth-url", set it to "http://localhost:4503"
   if [[ "$secret_name" == "eed_nextauth_url" ]]; then
     secret_value="http://localhost:4503"
+  elif [[ "$secret_name" == "eed_api_host" ]]; then
+    secret_value="your-eed-api-host-value"
   else
     # Get the secret value from GCP Secret Manager
     secret_value=$(gcloud secrets versions access latest --secret="$secret_name" 2>/dev/null || handle_error "Failed to retrieve secret $secret_name")

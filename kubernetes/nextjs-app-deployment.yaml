@@ -34,7 +34,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: eed-nextauth-google-client-secret
-                  key:  eed-nextauth-google-client-secret
+                  key: eed-nextauth-google-client-secret
             - name: NEXTAUTH_SECRET
               valueFrom:
                 secretKeyRef:
@@ -50,4 +50,63 @@ spec:
                 secretKeyRef:
                   name: eed-nextauth-url
                   key: eed-nextauth-url
-
+            - name: API_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: eed-api-host
+                  key: eed-api-host
+            - name: DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: eed-database
+                  key: eed-database
+            - name: DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: eed-database-host
+                  key: eed-database-host
+            - name: DATABASE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: eed-database-port
+                  key: eed-database-port
+            - name: DATABASE_PROTOCOL
+              valueFrom:
+                secretKeyRef:
+                  name: eed-database-protocol
+                  key: eed-database-protocol
+            - name: DATABASE_SCHEMA_ADMIN
+              valueFrom:
+                secretKeyRef:
+                  name: eed-database-schema-admin
+                  key: eed-database-schema-admin
+            - name: DATABASE_SCHEMA_CLEAN
+              valueFrom:
+                secretKeyRef:
+                  name: eed-database-schema-clean
+                  key: eed-database-schema-clean
+            - name: DATABASE_SCHEMA_WORKSPACE
+              valueFrom:
+                secretKeyRef:
+                  name: eed-database-schema-workspace
+                  key: eed-database-schema-workspace
+            - name: DATABASE_USER_ADMIN
+              valueFrom:
+                secretKeyRef:
+                  name: eed-database-user-admin
+                  key: eed-database-user-admin
+            - name: DATABASE_USER_ANALYST
+              valueFrom:
+                secretKeyRef:
+                  name: eed-database-user-analyst
+                  key: eed-database-user-analyst
+            - name: DATABASE_USER_PW_ADMIN
+              valueFrom:
+                secretKeyRef:
+                  name: eed-database-user-pw-admin
+                  key: eed-database-user-pw-admin
+            - name: DATABASE_USER_PW_ANALYST
+              valueFrom:
+                secretKeyRef:
+                  name: eed-database-user-pw-analyst
+                  key: eed-database-user-pw-analyst

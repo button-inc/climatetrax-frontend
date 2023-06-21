@@ -1,3 +1,5 @@
 {
-  "hi": "Hello, US."
+  "temp": {
+    "hi": "Hello, US!"
+  }
 }

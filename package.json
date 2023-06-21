@@ -7,9 +7,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "k8s": "minikube start && scripts/k8s-secrets.sh  && scripts/k8s-launch.sh"
+    "k8s": "minikube start && scripts/k8s-secrets.sh && scripts/k8s-launch.sh",
+    "tailwind:watch": "postcss tailwind.css -o styles.css -w"
   },
   "dependencies": {
+    "@graphile-contrib/pg-order-by-related": "^1.0.0",
+    "@graphile-contrib/pg-simplify-inflector": "^6.1.0",
+    "@graphile/pg-aggregates": "^0.1.1",
+    "@headlessui/react": "^1.7.15",
+    "@headlessui/tailwindcss": "^0.1.3",
+    "@material-tailwind/react": "^2.0.3",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.5",
+    "@mui/x-data-grid": "latest",
     "@types/node": "20.2.0",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
@@ -17,13 +27,23 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-react": "^7.32.2",
+    "graphql-request": "^5.2.0",
     "i18next": "^22.5.1",
     "i18next-browser-languagedetector": "7.0.1",
     "i18next-resources-to-backend": "1.1.3",
-    "next": "13.4.3",
+    "mui-datatables": "^4.3.0",
+    "next": "latest",
     "next-auth": "^4.22.1",
+    "next-i18next": "^13.3.0",
     "next-runtime-dotenv": "^1.5.1",
+    "pg": "^8.11.0",
     "postcss": "8.4.23",
+    "postgraphile": "^4.13.0",
+    "postgraphile-plugin-connection-filter": "^2.3.0",
+    "prettier": "^2.8.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-i18next": "12.1.1",
@@ -31,6 +51,8 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@playwright/test": "^1.35.0"
+    "@playwright/test": "^1.35.0",
+    "@types/mui-datatables": "^4.3.5",
+    "@types/pg": "^8.10.2"
   }
 }

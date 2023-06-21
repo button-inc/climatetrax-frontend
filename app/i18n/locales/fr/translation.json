@@ -1,8 +1,233 @@
 {
-  "hi": "FR Hello, Fallback!",
-  "html": {
-    "description": "FR TO DO",
-    "title": "ClimateTrax"
+  "analytic": {
+    "tag": "FR Data analytics"
   },
-  "msg": "FR Welcome! This is a fallback message common to all fr languages"
+  "anonymized": {
+    "area": {
+      "columns": {
+        "0": "FR Dataset",
+        "1": "FR Connector",
+        "2": "FR Imported Date",
+        "3": "FR Imported By"
+      }
+    },
+    "datasets": {
+      "columns": {
+        "0": "FR Dataset",
+        "1": "FR Connector",
+        "2": "FR Imported Date",
+        "3": "FR Imported By"
+      },
+      "tag": "FR Anonymized datasets"
+    }
+  },
+  "auth": {
+    "error": "FR Ops, there has been an authentication error.",
+    "signin": "FR Sign in with:",
+    "signout": "FR Sign Out"
+  },
+  "available": {
+    "buttons": {
+      "connection": {
+        "title": "FR New Connection",
+        "tooltip": "FR Add new connection"
+      },
+      "dataset": {
+        "title": "FR New Dataset",
+        "tooltip": "FR Add new dataset"
+      }
+    }
+  },
+  "crumbs": {
+    "analytic": {
+      "tag": "FR Data analytics"
+    },
+    "anonymized": {
+      "dataset": {
+        "tag": "FR Anonymized dataset"
+      },
+      "datasets": {
+        "tag": "FR Anonymized datasets"
+      }
+    },
+    "dataset": {
+      "add": {
+        "tag": "FR Add a new dataset"
+      },
+      "available": {
+        "tag": "FR Available datasets"
+      },
+      "connection": {
+        "tag": "FR Connections"
+      }
+    },
+    "home": {
+      "tag": "FR Home"
+    },
+    "imported": {
+      "datasets": {
+        "tag": "FR Anonymize a dataset"
+      }
+    },
+    "insight": {
+      "tag": "FR Connect a BI Tool"
+    }
+  },
+  "dataset": {
+    "add": {
+      "csv": "FR CSV",
+      "emailTo": "FR faker@fakeemail.com",
+      "emailSubject": "FR ClimateTrax: Add new dataset request",
+      "emailBody": "FR Request for new data connection:",
+      "google": "FR Google Sheets",
+      "json": "FR JSON",
+      "request": "FR Request a new dataset",
+      "tag": "FR Add a new dataset"
+    },
+    "available": {
+      "columns": {
+        "0": "FR Dataset",
+        "1": "FR Connector",
+        "2": "FR Imported Date",
+        "3": "FR Imported By"
+      },
+      "tag": "FR Available datasets"
+    },
+    "connection": {
+      "add": {
+        "fields": {
+          "connection": "FR Connection ID",
+          "keyjson": "FR Key File JSON",
+          "keypath": "FR Key File Path",
+          "project": "FR Project ID",
+          "type": "FR Connection Type",
+          "options": {
+            "type": {
+              "texts": {
+                "0": "FR Select a type",
+                "1": "FR Option 1",
+                "2": "FR Option 2",
+                "3": "FR Option 3"
+              },
+              "values": {
+                "0": "FR ",
+                "1": "FR 1",
+                "2": "FR 2",
+                "3": "FR 3"
+              }
+            }
+          }
+        },
+        "save": "FR Save",
+        "tag": "FR Add a new connection"
+      },
+      "columns": {
+        "0": "FR Dataset",
+        "1": "FR Connector",
+        "2": "FR Imported Date",
+        "3": "FR Imported By"
+      },
+      "tag": "FR Dataset Connections"
+    }
+  },
+  "hamburger": {
+    "analytic": "FR Data analytics",
+    "anonymized": "FR Anonymized datasets",
+    "dataset": "FR Available datasets",
+    "home": "FR Home",
+    "imported": "FR Anonymize a dataset",
+    "insight": "FR Data insights",
+    "language": {
+      "en": "FR English",
+      "fr": "FR Français",
+      "menu": "FR Languages"
+    },
+    "signin": "FR Signed in as:",
+    "signout": "FR Sign out"
+  },
+  "home": {
+    "routes": {
+      "analytic": {
+        "button": "FR Data Analytics",
+        "content": "FR Selecting your preferred methodologies and formula, calculate the total VKT and CO2E for your datasets. and publish your emissions.",
+        "title": "FR Calculating your emissions"
+      },
+      "anonymized": {
+        "button": "FR Anonymized datasets",
+        "content": "FR Review your anonymized datasets, review errors and rerun the anonymization process.",
+        "title": "FR Manage your anonymized datasets"
+      },
+      "dataset": {
+        "button": "FR Available datasets",
+        "content": "FR Upload emissions data to your ClimateTrax dashboard, choosing from a library of available datasets. If you can't find the data you need, configure your connection or request a data connection.",
+        "title": "FR Import datasets to your dashboard"
+      },
+      "home": {
+        "button": "FR Home"
+      },
+      "imported": {
+        "button": "FR Anonymize a dataset",
+        "content": "FR Review the the sensitivity level of your private information and initiative the anonymization process.",
+        "title": "FR Anonymize your data"
+      },
+      "insight": {
+        "button": "FR Data Insights",
+        "content": "FR Connect to a BI tool of your choice to conduct queries/visualization on your datasets.",
+        "title": "FR Viewing your data insights"
+      }
+    },
+    "tag": "FR Welcome"
+  },
+  "html": {
+    "description": "FR ",
+    "title": "FR ClimateTrax"
+  },
+  "imported": {
+    "area": {
+      "columns": {
+        "0": "FR Dataset",
+        "1": "FR Connector",
+        "2": "FR Imported Date",
+        "3": "FR Imported By",
+        "4": "FR Sensitivity"
+      },
+      "tag": "FR Imported dataset"
+    },
+    "datasets": {
+      "columns": {
+        "0": "FR Dataset",
+        "1": "FR Connector",
+        "2": "FR Imported Date",
+        "3": "FR Imported By",
+        "4": "FR Sensitivity"
+      },
+      "tag": "FR Anonymize a dataset"
+    }
+  },
+  "insight": {
+    "connMetabase": "FR METABASE:hostname, port, database, username, password",
+    "copied": "FR Copied!",
+    "emailTo": "FR faker@fakeemail.com",
+    "emailSubject": "FR ClimateTrax: BI Tool connector request",
+    "emailBody": "FR Request for connection string for BI Tool:",
+    "looker": "FR Looker",
+    "metabase": "FR Metabase",
+    "powerbi": "FR Power BI",
+    "request": "FR Request a new BI Tool Connection",
+    "tableau": "FR Tableau",
+    "tag": "FR Connect a BI Tool",
+    "text": "FR Connection information for the BI Tool has been copied to your clipboard.",
+    "tools": {
+      "looker": "FR Looker",
+      "metabase": "FR Metabase",
+      "powerbi": "FR Power BI",
+      "request": "FR Request a new BI Tool Connection",
+      "tableau": "FR Tableau"
+    }
+  },
+  "messages": {
+    "error": "FR Ops, something went wrong!",
+    "notfound": "FR Page cannot be found.",
+    "unauth": "FR Ops, you do not seem to have access to this area."
+  }
 }

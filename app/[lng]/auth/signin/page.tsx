@@ -4,14 +4,15 @@ import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { useTranslation } from "@/i18n/client";
 
-
 export default function Page() {
   const { t } = useTranslation("translation");
   const [data, setData] = useState<Record<string, ClientSafeProvider> | null>(
     null
   );
-  // 👇️ call to next-auth providers list
+
+  // 👇️  code running on the client-side should be placed inside a useEffect hook with the appropriate condition to ensure it only runs in the browser
   useEffect(() => {
+    // 👇️ call to next-auth providers list
     const fetchData = async () => {
       const providers = await getProviders();
       setData(providers);
@@ -21,7 +22,8 @@ export default function Page() {
   }, []);
 
   // 👇️ render the providers as login buttons
-   const callbackUrl = process.env.NEXTAUTH_CALLBACK_URL || "http://localhost:3000/";
+  const callbackUrl =
+    process.env.NEXTAUTH_CALLBACK_URL || "http://localhost:3000/";
 
   const content = data
     ? Object.values(data).map((provider: ClientSafeProvider) => (
