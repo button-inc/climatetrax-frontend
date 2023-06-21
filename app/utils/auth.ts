@@ -16,9 +16,9 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     KeycloakProvider({
-      clientId: "ClimateTrax-Client",
-      clientSecret: "KZ5zsX6vIEWBtNw2iPqCD9ZO4Jv4C2Y6",
-      issuer: "http://localhost:8080/realms/ClimateTrax",
+      clientId: process.env.KEYCLOAK_CLIENT_ID as string,
+      clientSecret: process.env.KEYCLOAK_CLIENT_SECRET as string,
+      issuer: process.env.KEYCLOAK_AUTH_URL as string + process.env.KEYCLOAK_AUTH_REALM  as string,
     }),
     
   ],
