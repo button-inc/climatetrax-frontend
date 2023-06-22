@@ -37,6 +37,7 @@ export const getQueryData = async (
 ): Promise<any[]> => {
   // Variables for graphql-request
   endpoint = process.env.API_HOST + endpoint;
+
   const variables: Variables = {};
   // IMPORTANT: Add the browser session cookie with the encrypted JWT to this server-side API request
   // To be used by middleware for route protection

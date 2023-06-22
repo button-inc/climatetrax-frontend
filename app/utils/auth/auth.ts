@@ -1,6 +1,28 @@
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import KeycloakProvider from "next-auth/providers/keycloak";
+
+//import { request, gql } from "graphql-request";
+
+async function getUserRole(email: string | null | undefined) {
+  /*
+  const endpoint = process.env.API_HOST + "api/role";
+  const query =
+    gql`
+    {
+      permissions(condition: { email: "` +
+    email +
+    `" })  {
+        nodes {
+          email
+          userrole
+        }
+      }
+    }`;
+  const data: any = await request(endpoint, query);
+  return data[Object.keys(data)[0]].nodes as any[];
+  */
+  return "analyst"; // 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨
+}
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -14,42 +36,42 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
-    KeycloakProvider({
-      clientId: process.env.KEYCLOAK_CLIENT_ID as string,
-      clientSecret: process.env.KEYCLOAK_CLIENT_SECRET as string,
-      issuer: ((process.env.KEYCLOAK_AUTH_URL as string) +
-        process.env.KEYCLOAK_AUTH_REALM) as string,
-    }),
   ],
   callbacks: {
-    session: ({ session, token }) => {
-      let rolesKeycloak;
-      if (token?.access_token) {
-        //👇️by utilizing the jwt object provided by NextAuth, you can achieve the desired functionality without importing the jsonwebtoken package
-        const data = token.jwt as {
-          azp: string;
-          resource_access: Record<string, { roles?: string[] }>;
-        };
-        const authorizedParty = data.azp;
-        rolesKeycloak = data.resource_access[authorizedParty]?.roles;
+    async session({ session, token }) {
+      // 👇️ add role to the token from our permissions table
+      if (!token.role) {
+        const role = await getUserRole(token.email);
+        if (role) {
+          // 👉️ OK: set JWT role from our user record
+          token.role = role;
+        }
       }
-
       return {
         ...session,
         user: {
           ...session.user,
           id: token.id,
-          role: "analyst", //token.role, 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨
+          role: token.role,
         },
       };
     },
-    jwt: ({ token, user }) => {
+    // 👇️ called whenever a JSON Web Token is created - we can add to the JWT in this callback
+    async jwt({ token, user }) {
       if (user) {
         const u = user as unknown as any;
+        // 👇️ add role to the token from our permissions table
+        if (!u.role) {
+          const role = await getUserRole(token.email);
+          if (role) {
+            // 👉️ OK: set JWT role from our user record
+            token.role = role;
+          }
+        }
         return {
           ...token,
           id: u.id,
-          role: "analyst", //u.role, 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨
+          role: u.role,
         };
       }
       return token;

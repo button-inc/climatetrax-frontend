@@ -3,6 +3,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "@/i18n/client";
 import { Fragment, useEffect, useState } from "react";
+import { signOut } from "next-auth/react";
 import { MenuItem } from "@/types/declarations";
 
 export default function Hamburger() {
@@ -54,15 +55,12 @@ export default function Hamburger() {
     const currentUrl = window.location.href;
     const url = new URL(currentUrl);
     const pathnameParts = url.pathname.split("/");
-    // Update the language part of the path
+    // 👇️ update the language part of the path
     pathnameParts[1] = language;
     url.pathname = pathnameParts.join("/");
-
     const newUrl = url.toString();
-
     window.history.pushState(null, "", newUrl);
-
-    // Reload the page
+    // 👇️ reload the page with ne language param
     window.location.reload();
   };
 
@@ -192,12 +190,12 @@ export default function Hamburger() {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="/api/auth/signout"
                                 className={`${
                                   active
                                     ? "bg-gray-100 text-gray-900"
                                     : "text-gray-700"
                                 } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
+                                onClick={() => signOut()}
                               >
                                 {t("hamburger.signout")}
                               </a>

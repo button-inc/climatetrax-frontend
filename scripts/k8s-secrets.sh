@@ -16,6 +16,9 @@ authenticate() {
   gcloud auth application-default login
 }
 
+# Start the Kubernetes cluster using Cloud Code
+#kubectl apply -f kubernetes/ || handle_error "Failed to start Kubernetes cluster"
+
 # Function to handle errors and exit the script
 handle_error() {
   echo "Error: $1" >&2
@@ -47,7 +50,7 @@ for secret_name in "${SECRET_NAMES[@]}"; do
   if [[ "$secret_name" == "eed_nextauth_url" ]]; then
     secret_value="http://localhost:4503"
   elif [[ "$secret_name" == "eed_api_host" ]]; then
-    secret_value="your-eed-api-host-value"
+    secret_value="http://localhost:3000/"
   else
     # Get the secret value from GCP Secret Manager
     secret_value=$(gcloud secrets versions access latest --secret="$secret_name" 2>/dev/null || handle_error "Failed to retrieve secret $secret_name")

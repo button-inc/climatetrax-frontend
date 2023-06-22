@@ -3,7 +3,11 @@ import { getProviders, signIn, ClientSafeProvider } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { useTranslation } from "@/i18n/client";
-
+import dynamic from "next/dynamic";
+//👇️ will not be rendered on the server, prevents error: Text content did not match. Server
+const Tag = dynamic(() => import("@/components/layout/Tag"), {
+  ssr: false,
+});
 export default function Page() {
   const { t } = useTranslation("translation");
   const [data, setData] = useState<Record<string, ClientSafeProvider> | null>(
@@ -48,5 +52,10 @@ export default function Page() {
       ))
     : null;
 
-  return <div>{content}</div>;
+  return (
+    <>
+      <Tag tag={"auth.tag"} crumbs={[]}></Tag>
+      {content}
+    </>
+  );
 }
