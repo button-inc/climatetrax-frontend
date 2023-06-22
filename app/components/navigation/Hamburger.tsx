@@ -50,6 +50,7 @@ export default function Hamburger() {
 
     /*👇️  include session?.user?.role in the dependency array to ensure the effect is re-run whenever the session?.user?.role value changes*/
   }, [session?.user?.role]);
+
   //👇️ language switcher
   const handleLanguageChange = (language: string) => {
     const currentUrl = window.location.href;
@@ -61,6 +62,12 @@ export default function Hamburger() {
     const newUrl = url.toString();
     window.history.pushState(null, "", newUrl);
     // 👇️ reload the page with ne language param
+    window.location.reload();
+  };
+
+  //👇️ signout
+  const handleSignOut = async () => {
+    await signOut();
     window.location.reload();
   };
 
@@ -195,7 +202,7 @@ export default function Hamburger() {
                                     ? "bg-gray-100 text-gray-900"
                                     : "text-gray-700"
                                 } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
-                                onClick={() => signOut()}
+                                onClick={handleSignOut}
                               >
                                 {t("hamburger.signout")}
                               </a>

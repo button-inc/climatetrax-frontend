@@ -30,11 +30,9 @@ export default function Page() {
   if (typeof window !== "undefined") {
     hostUrl = window.location.origin;
   }
-  const callbackUrl =
-    hostUrl === "http://localhost:4503"
-      ? "http://localhost:3000/"
-      : process.env.NEXTAUTH_URL;
-
+  console.log(process.env.GOOGLE_CLIENT_ID);
+  console.log(process.env.NEXTAUTH_URL);
+  const callbackUrl = "http://localhost:3000";
   const content = data
     ? Object.values(data).map((provider: ClientSafeProvider) => (
         <div key={provider.id} className={styles.provider}>
