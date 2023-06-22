@@ -25,9 +25,15 @@ export default function Page() {
     fetchData();
   }, []);
 
-  // 👇️ render the providers as login buttons
+  // 👇️ render the providers as login buttons with the correct calback url
+  let hostUrl;
+  if (typeof window !== "undefined") {
+    hostUrl = window.location.origin;
+  }
   const callbackUrl =
-    process.env.NEXTAUTH_CALLBACK_URL || "http://localhost:3000/";
+    hostUrl === "http://localhost:4503"
+      ? "http://localhost:3000/"
+      : process.env.NEXTAUTH_URL;
 
   const content = data
     ? Object.values(data).map((provider: ClientSafeProvider) => (
