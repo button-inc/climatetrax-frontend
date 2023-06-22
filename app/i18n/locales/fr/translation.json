@@ -24,7 +24,8 @@
   "auth": {
     "error": "FR Ops, there has been an authentication error.",
     "signin": "FR Sign in with:",
-    "signout": "FR Sign Out"
+    "signout": "FR Sign Out",
+    "tag": "FR Sign-in using an external identity provider:"
   },
   "available": {
     "buttons": {
