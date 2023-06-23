@@ -19,11 +19,11 @@ export const withAuthorization: MiddlewareFactory = (next: NextMiddleware) => {
 
     // 👇️ vars for route management
     const { pathname } = request.nextUrl;
-    const isRouteAPI = pathname.indexOf("/api/") > -1;
-    const isRouteAuth = pathname.indexOf("/auth") > -1;
+    const isRouteAuth =
+      pathname.indexOf("/auth") > -1 || pathname.indexOf("/unauth") > -1;
 
     // 👇️ check if authentication route
-    if (isRouteAPI === true || isRouteAuth === true) {
+    if (isRouteAuth === true) {
       const { query } = parse(request.url, true);
       const { error } = query;
       // 👇️ check if authentication error
@@ -40,60 +40,35 @@ export const withAuthorization: MiddlewareFactory = (next: NextMiddleware) => {
         req: request,
         secret: process.env.NEXTAUTH_SECRET,
       });
+      const role = "analyst"; //session?.role; 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨
 
-      if (session) {
-        // 👉️ OK: authenticated and authorized\route to next middleware
-        return next(request, _next);
+      if (session && role) {
+        // 👉️ OK: authenticated and authorized role
+
+        // 👇️ validate routes properties
+        const routes = pathname.split("/");
+        // 👇️ ensure routes with JUST a language param (ex: /en) are routed to user"s home page- based on user"s role
+        if (routes.length - 1 === 1) {
+          // 👉️ route to user role home
+          return NextResponse.redirect(
+            new URL(`/${lng}/${role}/home`, request.url)
+          );
+        }
+
+        // 👇️ validate routes matches jwt authenticated user role property
+        if (routes.includes(role.toString())) {
+          // 👉️ OK: route request
+          return next(request, _next);
+        } else {
+          // ⛔️  UNAUTH'D:
+          return NextResponse.redirect(new URL(`/${lng}/unauth`, request.url));
+        }
       } else {
-        // 👉️ UNAUTH'D: redirect to signin
+        // ⛔️  UNAUTH'D: redirect to signin
         return NextResponse.redirect(
           new URL(`/${lng}/auth/signin`, request.url)
         );
       }
     }
-
-    /*
-    // 👇️ vars for user session details via next-auth getToken to decrypt jwt in request cookie
-    const session = await getToken({
-      req: request,
-      secret: process.env.NEXTAUTH_SECRET,
-    });
-
-    // 👇️ route management- gate access users only authenticated by oAuth and authorized by DB permissions table
-    // 👉️  authenticated user"s jwt role property (set from DB permission table in api/auth/nextauth)
-    const role = session?.role;
-    if (!role) {
-      // ⛔️ denied: request is not authorized - route to auth pathway
-
-      // 👇️ vars for route management
-      const { pathname } = request.nextUrl;
-      const isRouteAuth = pathname.indexOf("auth") > -1;
-      const isRouteAPI = pathname.indexOf("/api/") > -1;
-
-      // 👇️ set outgoing response with `Set-Cookie` header
-      let lng = request.cookies.get(cookieName).value;
-      let response;
-      if (isRouteAuth === true) {
-        //👉️ allow calls to /auth for authentication
-        response = NextResponse.next();
-      } else {
-        // 👇️ redirect to unauth or auth login
-        let url;
-        if (isRouteAPI === true) {
-          url = "/api/auth/unauthorized";
-        } else {
-          url = `/${lng}/auth/signin`;
-        }
-        response = NextResponse.redirect(new URL(url, request.url));
-      }
-      // 👉️ route to auth pathway
-      return response;
-    } else {
-      //👌 ok: route to next middleware
-      return next(request, _next);
-    }
-    */
-    //NextResponse.next();
-    //return next(request, _next);
   };
 };

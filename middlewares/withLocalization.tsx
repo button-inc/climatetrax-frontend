@@ -11,7 +11,6 @@ export const withLocalization: MiddlewareFactory = (next) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
     // 1️⃣ Check (valid) Language Prefix in URL
     const { pathname } = request.nextUrl;
-
     //👇️ the first non-empty segment is considered the language prefix
     const [languagePrefix] = pathname.split("/").filter(Boolean);
     // 👇️ validate the language is supported from the accepted languages

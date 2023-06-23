@@ -3,15 +3,20 @@ import { getProviders, signIn, ClientSafeProvider } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { useTranslation } from "@/i18n/client";
-
-
+import dynamic from "next/dynamic";
+//👇️ will not be rendered on the server, prevents error: Text content did not match. Server
+const Tag = dynamic(() => import("@/components/layout/Tag"), {
+  ssr: false,
+});
 export default function Page() {
   const { t } = useTranslation("translation");
   const [data, setData] = useState<Record<string, ClientSafeProvider> | null>(
     null
   );
-  // 👇️ call to next-auth providers list
+
+  // 👇️  code running on the client-side should be placed inside a useEffect hook with the appropriate condition to ensure it only runs in the browser
   useEffect(() => {
+    // 👇️ call to next-auth providers list
     const fetchData = async () => {
       const providers = await getProviders();
       setData(providers);
@@ -20,8 +25,15 @@ export default function Page() {
     fetchData();
   }, []);
 
-  // 👇️ render the providers as login buttons
-   const callbackUrl = process.env.NEXTAUTH_CALLBACK_URL || "http://localhost:3000/";
+  // 👇️ render the providers as login buttons with the correct calback url
+  let hostUrl;
+  if (typeof window !== "undefined") {
+    hostUrl = window.location.origin;
+  }
+  const callbackUrl =
+    hostUrl && hostUrl.includes("http://localhost:4503")
+      ? "http://localhost:3000"
+      : process.env.NEXTAUTH_URL || "http://localhost:3000";
 
   const content = data
     ? Object.values(data).map((provider: ClientSafeProvider) => (
@@ -46,5 +58,10 @@ export default function Page() {
       ))
     : null;
 
-  return <div>{content}</div>;
+  return (
+    <>
+      <Tag tag={"auth.tag"} crumbs={[]}></Tag>
+      {content}
+    </>
+  );
 }

@@ -16,11 +16,17 @@ export const withResponse: MiddlewareFactory = (next: NextMiddleware) => {
     let lng = request.cookies.get(cookieName)?.value;
     if (!lng) lng = fallbackLng;
 
-    // 👇️ add lng route if missing or invalid in request url
-    const isValidPath =
-      request.cookies.get("languagePrefix")?.value === lng ? true : false;
-    if (request.nextUrl.pathname === "/" || !isValidPath) {
-      return NextResponse.redirect(new URL(`/${lng}`, request.url));
+    // 👇️ vars for route management
+    const { pathname } = request.nextUrl;
+    const isRouteAPI = pathname.indexOf("/api/") > -1;
+
+    // 👇️ if not api call, add lng route if missing or invalid lng in request url
+    if (!isRouteAPI) {
+      const isValidPath =
+        request.cookies.get("languagePrefix")?.value === lng ? true : false;
+      if (request.nextUrl.pathname === "/" || !isValidPath) {
+        return NextResponse.redirect(new URL(`/${lng}`, request.url));
+      }
     }
 
     // 👇️ create response

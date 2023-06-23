@@ -176,14 +176,12 @@ ClimateTrax uses middlewares and i18n libraries to manage locale setting and tra
 - /fr
 - /fr-CA
 
-
 # NextAuth.js
 
-Authentication and authorization functionality is realized using NextAuth.js, an open source community project. 
+Authentication and authorization functionality is realized using NextAuth.js, an open source community project.
 See [NextAuth.js repo](https://github.com/nextauthjs/next-auth) to learn more.
 
 Within ClimateTrax, the next-auth functionality lies within folder `app\api\[...nextauth]\route.ts` and is managed within `middleware.ts` and `middlewares\withAuthorization.ts`
-
 
 # Running App Locally
 
@@ -252,28 +250,28 @@ File structure for local k8s cluster:
 |---- skaffold.yaml
 `
 
-
 ### Kubernetes secrets
 
-When running the app in minikube the process.env.* reflect Kubernetes secrets.  To set the Kubernetes secrets from GCP Secret using scripts\k8s-secrets.sh:
+When running the app in minikube the process.env.\* reflect Kubernetes secrets. To set the Kubernetes secrets from GCP Secret using scripts\k8s-secrets.sh:
 
 1. Set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable:
 
-    - Go to the GCP Console and navigate to the IAM & Admin service account ([cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com](mailto:cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com)).
-    - Generate a service account key file for the selected service account.
-    - Download the key file in JSON format to your local machine.
-    - Set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable to the path of the key file. 
-    
-    ```
-    export GOOGLE_APPLICATION_CREDENTIALS=/path/to/keyfile.json
-    ```
-    
+   - Go to the GCP Console and navigate to the IAM & Admin service account ([cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com](mailto:cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com)).
+   - Generate a service account key file for the selected service account.
+   - Download the key file in JSON format to your local machine.
+   - Set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable to the path of the key file.
+
+   ```
+   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/keyfile.json
+   ```
+
 2. Start k8s minikube:
 
 ```
 minikube start
 
 ```
+
 3. run script
 
 ```
@@ -285,9 +283,10 @@ cd scripts
 bash k8s-secrets.sh
 
 ```
+
 The terminal `output` tab will display the failure or success of setting a Kubernetes secret.
 
-To see the secrets within a running Kubernetes cluster use command:
+To see the secrets within a **running** Kubernetes cluster navigate to `Cloud Code\Kubernetes\minikube ACTIVE\Namespaces\Secrets` or use terminal command:
 
 ```
 kubectl get secrets -o go-template='{{range $secret := .items}}{{ $secret.metadata.name }}{{ "\n" }}{{- range $key, $value := $secret.data }}{{ $key }}={{ $value | base64decode }}{{ "\n" }}{{- end }}{{ "\n" }}{{- end}}'
@@ -300,10 +299,9 @@ After secrets are set you can launch the app using Cloud Code:
 - Select "Run on Kubernetes" in the display prompt
 
 OR (WIP) run a package.json script called "k8s" which will start a minikube, set the secrets from GCP and (?) launch the cluster using the skaffold.yaml:
-  
-   ```
-   pnpm run k8s
-   ```
+
+```
+pnpm run k8s
+```
 
 The output of `k8s` will be displayed in the terminal to confirm failure or success of setting a Kubernetes secret using shell "scripts\k8s-secrets.sh"; after which, Cloud Code\Run Kubernetes should launch
-

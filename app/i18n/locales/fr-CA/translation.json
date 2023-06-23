@@ -1,3 +1,5 @@
 {
-  "hi": "FR Hello, Fallback!"
+  "temp": {
+    "hi": "FR Hello, CA!"
+  }
 }

@@ -1,3 +1,5 @@
 {
-  "hi": "Hello, CA!"
+  "temp": {
+    "hi": "Hello, CA!"
+  }
 }

@@ -1,13 +1,234 @@
 {
-  "hi": "Hello, Fallback!",
+  "analytic": {
+    "tag": "Data analytics"
+  },
+  "anonymized": {
+    "area": {
+      "columns": {
+        "0": "Dataset",
+        "1": "Connector",
+        "2": "Imported Date",
+        "3": "Imported By"
+      }
+    },
+    "datasets": {
+      "columns": {
+        "0": "Dataset",
+        "1": "Connector",
+        "2": "Imported Date",
+        "3": "Imported By"
+      },
+      "tag": "Anonymized datasets"
+    }
+  },
   "auth": {
     "error": "Ops, there has been an authentication error.",
-    "signin": "Sign in with:",
-    "signout": "Sign Out"
+    "signin": "Sign-in with:",
+    "signout": "Sign-out",
+    "tag": "Sign-in using an external identity provider:"
+  },
+  "available": {
+    "buttons": {
+      "connection": {
+        "title": "New Connection",
+        "tooltip": "Add new connection"
+      },
+      "dataset": {
+        "title": "New Dataset",
+        "tooltip": "Add new dataset"
+      }
+    }
+  },
+  "crumbs": {
+    "analytic": {
+      "tag": "Data analytics"
+    },
+    "anonymized": {
+      "dataset": {
+        "tag": "Anonymized dataset"
+      },
+      "datasets": {
+        "tag": "Anonymized datasets"
+      }
+    },
+    "dataset": {
+      "add": {
+        "tag": "Add a new dataset"
+      },
+      "available": {
+        "tag": "Available datasets"
+      },
+      "connection": {
+        "tag": "Connections"
+      }
+    },
+    "home": {
+      "tag": "Home"
+    },
+    "imported": {
+      "datasets": {
+        "tag": "Anonymize a dataset"
+      }
+    },
+    "insight": {
+      "tag": "Connect a BI Tool"
+    }
+  },
+  "dataset": {
+    "add": {
+      "csv": "CSV",
+      "emailTo": "faker@fakeemail.com",
+      "emailSubject": "ClimateTrax: Add new dataset request",
+      "emailBody": "Request for new data connection:",
+      "google": "Google Sheets",
+      "json": "JSON",
+      "request": "Request a new dataset",
+      "tag": "Add a new dataset"
+    },
+    "available": {
+      "columns": {
+        "0": "Dataset",
+        "1": "Connector",
+        "2": "Imported Date",
+        "3": "Imported By"
+      },
+      "tag": "Available datasets"
+    },
+    "connection": {
+      "add": {
+        "fields": {
+          "connection": "Connection ID",
+          "keyjson": "Key File JSON",
+          "keypath": "Key File Path",
+          "project": "Project ID",
+          "type": "Connection Type",
+          "options": {
+            "type": {
+              "texts": {
+                "0": "Select a type",
+                "1": "Option 1",
+                "2": "Option 2",
+                "3": "Option 3"
+              },
+              "values": {
+                "0": "",
+                "1": "1",
+                "2": "2",
+                "3": "3"
+              }
+            }
+          }
+        },
+        "save": "Save",
+        "tag": "Add a new connection"
+      },
+      "columns": {
+        "0": "Dataset",
+        "1": "Connector",
+        "2": "Imported Date",
+        "3": "Imported By"
+      },
+      "tag": "Dataset Connections"
+    }
+  },
+  "hamburger": {
+    "analytic": "Data analytics",
+    "anonymized": "Anonymized datasets",
+    "dataset": "Available datasets",
+    "home": "Home",
+    "imported": "Anonymize a dataset",
+    "insight": "Data insights",
+    "language": {
+      "en": "English",
+      "fr": "Français",
+      "menu": "Languages"
+    },
+    "signin": "Signed in as:",
+    "signout": "Sign out"
+  },
+  "home": {
+    "routes": {
+      "analytic": {
+        "button": "Data Analytics",
+        "content": "Selecting your preferred methodologies and formula, calculate the total VKT and CO2E for your datasets. and publish your emissions.",
+        "title": "Calculating your emissions"
+      },
+      "anonymized": {
+        "button": "Anonymized datasets",
+        "content": "Review your anonymized datasets, review errors and rerun the anonymization process.",
+        "title": "Manage your anonymized datasets"
+      },
+      "dataset": {
+        "button": "Available datasets",
+        "content": "Upload emissions data to your ClimateTrax dashboard, choosing from a library of available datasets. If you can't find the data you need, configure your connection or request a data connection.",
+        "title": "Import datasets to your dashboard"
+      },
+      "home": {
+        "button": "Home"
+      },
+      "imported": {
+        "button": "Anonymize a dataset",
+        "content": "Review the the sensitivity level of your private information and initiative the anonymization process.",
+        "title": "Anonymize your data"
+      },
+      "insight": {
+        "button": "Data Insights",
+        "content": "Connect to a BI tool of your choice to conduct queries/visualization on your datasets.",
+        "title": "Viewing your data insights"
+      }
+    },
+    "tag": "Welcome"
   },
   "html": {
-    "description": "TO DO",
+    "description": "",
     "title": "ClimateTrax"
   },
-  "msg": "Welcome! This is a fallback message common to all en languages"
+  "imported": {
+    "area": {
+      "columns": {
+        "0": "Dataset",
+        "1": "Connector",
+        "2": "Imported Date",
+        "3": "Imported By",
+        "4": "Sensitivity"
+      },
+      "tag": "Imported dataset"
+    },
+    "datasets": {
+      "columns": {
+        "0": "Dataset",
+        "1": "Connector",
+        "2": "Imported Date",
+        "3": "Imported By",
+        "4": "Sensitivity"
+      },
+      "tag": "Anonymize a dataset"
+    }
+  },
+  "insight": {
+    "connMetabase": "METABASE:hostname, port, database, username, password",
+    "copied": "Copied!",
+    "emailTo": "faker@fakeemail.com",
+    "emailSubject": "ClimateTrax: BI Tool connector request",
+    "emailBody": "Request for connection string for BI Tool:",
+    "looker": "Looker",
+    "metabase": "Metabase",
+    "powerbi": "Power BI",
+    "request": "Request a new BI Tool Connection",
+    "tableau": "Tableau",
+    "tag": "Connect a BI Tool",
+    "text": "Connection information for the BI Tool has been copied to your clipboard.",
+    "tools": {
+      "looker": "Looker",
+      "metabase": "Metabase",
+      "powerbi": "Power BI",
+      "request": "Request a new BI Tool Connection",
+      "tableau": "Tableau"
+    }
+  },
+  "messages": {
+    "error": "Ops, something went wrong!",
+    "notfound": "Page cannot be found.",
+    "unauth": "Ops, you do not seem to have access to this area."
+  }
 }

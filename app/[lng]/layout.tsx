@@ -9,16 +9,17 @@ The app directory must include a root layout.tsx
 The root layout must define <html> and <body> tags since Next.js does not automatically create them.
 You can use the head.js special file to manage <head> HTML elements, for example, the <title> element.
 */
-//
-export default async function RootLayout({
-  children,
-  params: { lng },
-}: {
+
+
+interface RootLayoutProps {
   children: React.ReactNode;
   params: {
     lng: string;
   };
-}) {
+}
+
+export default async function RootLayout({ children, params: { lng } }: RootLayoutProps)
+{
   const { i18n } = await useTranslation("translation");
   const description = i18n.t("html.description");
   const title = i18n.t("html.title");
