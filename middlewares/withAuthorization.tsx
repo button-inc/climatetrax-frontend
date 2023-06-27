@@ -40,7 +40,7 @@ export const withAuthorization: MiddlewareFactory = (next: NextMiddleware) => {
         req: request,
         secret: process.env.NEXTAUTH_SECRET,
       });
-      const role = "analyst"; //session?.role; 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨
+      const role = session?.role;
 
       if (session && role) {
         // 👉️ OK: authenticated and authorized role

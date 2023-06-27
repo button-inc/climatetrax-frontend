@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { request, Variables } from "graphql-request";
 import { GraphqlResponse } from "@/types/declarations";
+import fs from "fs";
 
 /**
  * Flatten a nested JSON object
@@ -77,4 +78,22 @@ export const getPropByPath = (
   if (object && myPath.length)
     return getPropByPath(object[myPath.shift()!], myPath, defaultValue);
   return object === undefined ? defaultValue : object;
+};
+
+/**
+ * Log message to local json file
+ * @param message - The message to log
+ */
+export const logMessage = (msg: string): any => {
+  const errorLogPath = "./app/logs/errors/file.json";
+  const errorData = {
+    timestamp: new Date().toISOString(),
+    type: "upload",
+    error: msg,
+  };
+  fs.appendFile(errorLogPath, JSON.stringify(errorData) + "\n", (err) => {
+    if (err) {
+      console.error("Error writing to error log:", err);
+    }
+  });
 };

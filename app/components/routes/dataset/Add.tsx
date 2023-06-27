@@ -2,6 +2,7 @@
 import { useTranslation } from "@/i18n/client";
 import { crumbsDatasetAdd } from "@/utils/navigation/crumbs";
 import { GraphqlEndPoint } from "@/types/declarations";
+import { useEffect, useState } from "react";
 
 import dynamic from "next/dynamic";
 //👇️ will not be rendered on the server, prevents error: Text content did not match. Server
@@ -11,6 +12,12 @@ const Tag = dynamic(() => import("@/components/layout/Tag"), {
 export default function Page({ endpoint }: GraphqlEndPoint) {
   // 👇️ language management
   const { t } = useTranslation("translation");
+  // 👇️ screen masking management
+  const [isMasked, setIsMasked] = useState(false);
+  // 👇️ success message management
+  const [successMessage, setSuccessMessage] = useState("");
+  // 👇️ error message management
+  const [errorMessage, setErrorMessage] = useState("");
 
   // 👇️ handler for click: request a new connection
   const handleClickRequest = () => {
@@ -22,47 +29,65 @@ export default function Page({ endpoint }: GraphqlEndPoint) {
       "_blank"
     );
   };
-  // 👇️ handler for click Add dataset tiles...
+
+  // 👇️ handler for click: Add dataset tiles
   const handleClickInputFile = () => {
+    // 👇️ clear messages
+    setSuccessMessage("");
+    setErrorMessage("");
     // 👇️ display select file prompt
     const inputFile = document.getElementById("inputfile");
     if (inputFile) {
       inputFile.click();
     }
   };
+
   // 👇️ handler for file input change
-  /*Using GCP Cloud Storage signed URL allows you to upload the file to the specified location in Google Cloud Storage without the need for authentication or authorization.*/
   const handleChangeInputFile = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (event.target.files && event.target.files[0]) {
+      // 👇️ mask the screen
+      setIsMasked(true);
+      // 👇️ add file upload to formdata
       const file = event.target.files[0];
-      if (file) {
-        // 👇️ post form data to api
-        const body = new FormData();
-        body.append("file", file);
-        await fetch(endpoint, {
+      const formData = new FormData();
+      formData.append("uploadedFile", file);
+      // 👇️ post formdata to api
+      try {
+        const response = await fetch(endpoint, {
           method: "POST",
-          body,
-        })
-          .then((response) => {
-            // handle the response
-            return response.json();
-          })
-          .then((data) => {
-            //TO DO...create record of successful file upload
-            console.log(data);
-          })
-          .catch((error) => {
-            // handle the error
-            console.log(error);
-          });
+          body: formData,
+        });
+        // 👇️ display response message
+        if (response.ok) {
+          const successMessage = t("messages.successes.upload");
+          setSuccessMessage(successMessage);
+        } else {
+          {
+            const errorMessage = t("messages.errors.upload");
+            setErrorMessage(errorMessage);
+          }
+        }
+      } catch (err) {
+        console.error("Error uploading file:", err);
+      } finally {
+        // 👇️ unmask screen
+        setIsMasked(false);
+        // 👇️ clear the file input value
+        event.target.value = "";
       }
+    } else {
+      // 👇️ unmask screen
+      setIsMasked(false);
     }
   };
   return (
     <>
+      {/* Mask overlay */}
+      {isMasked && <div className="fixed inset-0 bg-[rgba(0,0,0,0.5)] z-50" />}
       <Tag tag={"dataset.add.tag"} crumbs={crumbsDatasetAdd}></Tag>
+      {/* Tiles */}
       <div className="grid grid-cols-4 gap-4">
         <div className="card cursor-pointer" onClick={handleClickRequest}>
           <div className="top1">
@@ -75,7 +100,6 @@ export default function Page({ endpoint }: GraphqlEndPoint) {
             <p>{t("dataset.add.request")}</p>
           </div>
         </div>
-
         <div className="card" onClick={() => handleClickInputFile()}>
           <div className="top">
             <img
@@ -98,7 +122,6 @@ export default function Page({ endpoint }: GraphqlEndPoint) {
             <p>{t("dataset.add.google")}</p>
           </div>
         </div>
-
         <div className="card" onClick={() => handleClickInputFile()}>
           <div className="top">
             <img
@@ -111,6 +134,27 @@ export default function Page({ endpoint }: GraphqlEndPoint) {
           </div>
         </div>
       </div>
+      {/* render the success message if it exists */}
+      {successMessage && (
+        <div
+          className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4"
+          role="alert"
+        >
+          <p className="font-bold">{t("messages.successes.label")}</p>
+          <p>{successMessage}</p>
+        </div>
+      )}
+      {/* render the error message if it exists */}
+      {errorMessage && (
+        <div
+          className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+          role="alert"
+        >
+          <p className="font-bold">{t("messages.errors.label")}</p>
+          <p>{errorMessage}</p>
+        </div>
+      )}
+      {/* hidden file input, triggered from handleClickInputFile */}
       <input
         type="file"
         id="inputfile"

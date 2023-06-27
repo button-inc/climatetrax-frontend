@@ -4,8 +4,7 @@ export default async function NotFound() {
   const { i18n } = await useTranslation();
   return (
     <>
-      <p> {i18n.t("message.notfound")}</p>
+      <p> {i18n.t("messages.errors.notfound")}</p>
     </>
   );
 }
-

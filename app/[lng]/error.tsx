@@ -5,8 +5,7 @@ export default async function Error() {
   const { t } = useTranslation("translation");
   return (
     <>
-      <p> {t("message.error")}</p>
+      <p> {t("messages.errors.error")}</p>
     </>
   );
 }
-

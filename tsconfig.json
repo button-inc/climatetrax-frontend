@@ -20,16 +20,17 @@
       }
     ],
     "paths": {
-      "api/*": ["./app/api/*"],
       "@/*": ["./*"],
+      "api/*": ["./app/api/*"],
+      "@/auth/*": ["./app/$1/auth/*"],
       "@/components/*": ["./app/components/*"],
       "@/i18n": ["./app/i18n"],
       "@/i18n/*": ["./app/i18n/*"],
+      "@/logs/*": ["./app/logs/*"],
       "@/middlewares": ["./middlewares"],
       "@/styles/*": ["./app/styles/*"],
       "@/types/*": ["./app/types/*"],
-      "@/utils/*": ["./app/utils/*"],
-      "@/auth/*": ["./app/$1/auth/*"]
+      "@/utils/*": ["./app/utils/*"]
     },
     "types": ["next", "next-auth"]
   },

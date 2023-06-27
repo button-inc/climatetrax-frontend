@@ -22,7 +22,7 @@ To quote the [Rush](https://rushjs.io/) team:
 
 > Microsoft uses pnpm in Rush repos with hundreds of projects and hundreds of PRs per day, and we’ve found it to be very fast and reliable.
 
-## PNPM Background
+### PNPM Background
 
 pnpm uses a content-addressable filesystem to store all files from all module directories on a disk.
 When using npm, if you have 100 projects using lodash, you will have 100 copies of lodash on disk.
@@ -38,7 +38,7 @@ As a result, you save gigabytes of space on your disk and you have a lot faster 
 If you'd like more details about the unique `node_modules` structure that pnpm creates and
 why it works fine with the Node.js ecosystem, read this small article: [Flat node_modules is not the only way](https://pnpm.io/blog/2020/05/27/flat-node-modules-is-not-the-only-way).
 
-## Getting Started
+### Getting Started
 
 [Install PNPM](https://pnpm.io/installation), if you haven’t already:
 
@@ -84,7 +84,7 @@ pnpm add package-name
 
 to install the latest version of package-name from the npm registry by default.
 
-# Next.js 13
+## Next.js 13
 
 [Next.js 13](https://nextjs.org/blog/next-13-4) introduced a new file-system based router which works in a new directory named app.
 
@@ -131,7 +131,7 @@ pnpm run prettier
 Next.js [Middleware ](https://nextjs.org/docs/advanced-features/middleware) allows control over requests before they are completed. Responses can be modified based on conditions such as authentication session or language detection along with implementing persistence via cookie. To create secured routes in Next.js, middleware functions are required to authenticate and authorize the requests made to the route before allowing access to it.
 ClimateTrax uses higher-order functions to create middleware functions with a utility function that uses recursion of separated the logical functions; such as, withLocalization, withResponse that manage the localization prefix; headers and cookies for translation management.
 
-# i18next
+## i18next
 
 Multi-lingual functionality within the Next.js app directory is realized using [i18next](https://www.i18next.com).
 
@@ -176,16 +176,43 @@ ClimateTrax uses middlewares and i18n libraries to manage locale setting and tra
 - /fr
 - /fr-CA
 
-# NextAuth.js
+## NextAuth.js
 
 Authentication and authorization functionality is realized using NextAuth.js, an open source community project.
 See [NextAuth.js repo](https://github.com/nextauthjs/next-auth) to learn more.
 
 Within ClimateTrax, the next-auth functionality lies within folder `app\api\[...nextauth]\route.ts` and is managed within `middleware.ts` and `middlewares\withAuthorization.ts`
 
-# Running App Locally
+## Google Cloud Client Libraries
 
-## run dev server
+Google Cloud Client Libraries are a set of libraries developed by Google to interact with various Google Cloud services. These client libraries provide idiomatic and convenient ways to access and use Google Cloud services.
+The client libraries integrate with Google Cloud authentication mechanisms, such as Application Default Credentials (ADC) and service account key files. This allows your application to authenticate and authorize with Google Cloud services seamlessly.
+
+To configure the local environment to use Application Default Credentials (ADC) authentication for Google Cloud services, follow these steps:
+
+1. Set up your Google Cloud project:
+   - Create a new project or use an existing project in the Google Cloud Console (https://console.cloud.google.com/).
+   - Enable the necessary APIs for the services you want to use. For example, enable the Cloud Storage API if you're working with Google Cloud Storage.
+   - Create a service account:
+     - Go to the "IAM & Admin" section in the Cloud Console.
+     - Select "Service Accounts" and click on "Create Service Account".
+     - Provide a name and optional description for the service account.
+     - Assign the desired roles to the service account based on the permissions it needs. For example, if you're using Cloud Storage, you can assign the "Storage Object Admin" or "Storage Object Viewer" role.
+     - Choose the key type (JSON is recommended) and click on "Create" to generate and download the service account key file (credentials file). This file contains the necessary credentials for authentication.
+   - Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to point to the path of the downloaded service account key file. This variable tells the client libraries where to find the credentials. For example, you can set it in your terminal session or add it to your project's configuration file:
+     - Linux/Mac:
+       ```
+       export GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/credentials.json
+       ```
+2. Initialize the client library with ADC:
+   - In your code, initialize the Google Cloud client library for the service you're using. The library will automatically detect the `GOOGLE_APPLICATION_CREDENTIALS` environment variable and use the specified credentials for authentication.
+   - Each client library may have its own initialization method. Consult the documentation of the specific library you're using for the initialization steps.
+
+By following these steps, your local environment will be configured to use ADC authentication, and the client libraries will automatically authenticate requests to Google Cloud services using the provided service account credentials.
+
+## Running App Locally
+
+### run dev server
 
 1. Install all dependencies for a project (run command from the folder relative to the package.json file):
 
@@ -254,25 +281,14 @@ File structure for local k8s cluster:
 
 When running the app in minikube the process.env.\* reflect Kubernetes secrets. To set the Kubernetes secrets from GCP Secret using scripts\k8s-secrets.sh:
 
-1. Set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable:
-
-   - Go to the GCP Console and navigate to the IAM & Admin service account ([cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com](mailto:cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com)).
-   - Generate a service account key file for the selected service account.
-   - Download the key file in JSON format to your local machine.
-   - Set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable to the path of the key file.
-
-   ```
-   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/keyfile.json
-   ```
-
-2. Start k8s minikube:
+1. Start k8s minikube:
 
 ```
 minikube start
 
 ```
 
-3. run script
+2. run script
 
 ```
 cd scripts
@@ -303,5 +319,3 @@ OR (WIP) run a package.json script called "k8s" which will start a minikube, set
 ```
 pnpm run k8s
 ```
-
-The output of `k8s` will be displayed in the terminal to confirm failure or success of setting a Kubernetes secret using shell "scripts\k8s-secrets.sh"; after which, Cloud Code\Run Kubernetes should launch
