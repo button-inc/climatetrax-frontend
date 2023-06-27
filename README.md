@@ -190,15 +190,10 @@ The client libraries integrate with Google Cloud authentication mechanisms, such
 
 To configure the local environment to use Application Default Credentials (ADC) authentication for Google Cloud services, follow these steps:
 
-1. Set up your Google Cloud project:
-   - Create a new project or use an existing project in the Google Cloud Console (https://console.cloud.google.com/).
-   - Enable the necessary APIs for the services you want to use. For example, enable the Cloud Storage API if you're working with Google Cloud Storage.
-   - Create a service account:
-     - Go to the "IAM & Admin" section in the Cloud Console.
-     - Select "Service Accounts" and click on "Create Service Account".
-     - Provide a name and optional description for the service account.
-     - Assign the desired roles to the service account based on the permissions it needs. For example, if you're using Cloud Storage, you can assign the "Storage Object Admin" or "Storage Object Viewer" role.
-     - Choose the key type (JSON is recommended) and click on "Create" to generate and download the service account key file (credentials file). This file contains the necessary credentials for authentication.
+1. Get service account key:
+     - Go to the "IAM & Admin" section in the [Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts?project=emissions-elt-demo)
+     - Select "Service Accounts" and click on "cloud-storage-sa".
+     - Choose the key tab and click on "Create" to generate and download the service account key file (credentials file). This file contains the necessary credentials for authentication.
    - Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to point to the path of the downloaded service account key file. This variable tells the client libraries where to find the credentials. For example, you can set it in your terminal session or add it to your project's configuration file:
      - Linux/Mac:
        ```
