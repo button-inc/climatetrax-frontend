@@ -1,14 +1,23 @@
 {
-    "configurations": [
+  "configurations": [
+    {
+      "name": "Kubernetes: Run/Debug",
+      "type": "cloudcode.kubernetes",
+      "request": "launch",
+      "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+      "imageRegistry": "gcr.io/emissions-elt-demo",
+      "watch": true,
+      "cleanUp": true,
+      "portForward": true,
+      "debug": [
         {
-            "name": "Kubernetes: Run/Debug",
-            "type": "cloudcode.kubernetes",
-            "request": "launch",
-            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
-            "imageRegistry": "gcr.io/emissions-elt-demo",
-            "watch": true,
-            "cleanUp": true,
-            "portForward": true
+          "image": "nextjs-docker-image",
+          "containerName": "nextjs-app",
+          "sourceFileMap": {
+            "${workspaceFolder}": "/app"
+          }
         }
-    ]
+      ]
+    }
+  ]
 }

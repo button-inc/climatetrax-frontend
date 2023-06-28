@@ -140,12 +140,12 @@ docker ps
 ClimateTrax uses middlewares and i18n libraries to manage locale setting and translations so that the i18n instance performs cascading lookups of json files in a i18n\locale folder based on region specific to broader language default structure:
 
 **File structure:**
-│   ├── i18n
-│   │   └── locales
-│   │   └── en
-│   │   └── home.json
-│   │   └── en-US
-│   │   └── home.json
+│ ├── i18n
+│ │ └── locales
+│ │ └── en
+│ │ └── home.json
+│ │ └── en-US
+│ │ └── home.json
 
 **en\home.json**
 
@@ -183,32 +183,70 @@ See [NextAuth.js repo](https://github.com/nextauthjs/next-auth) to learn more.
 
 Within ClimateTrax, the next-auth functionality lies within folder `app\api\[...nextauth]\route.ts` and is managed within `middleware.ts` and `middlewares\withAuthorization.ts`
 
-## Google Cloud Client Libraries
+## `GOOGLE_APPLICATION_CREDENTIALS`
 
-Google Cloud Client Libraries are a set of libraries developed by Google to interact with various Google Cloud services. These client libraries provide idiomatic and convenient ways to access and use Google Cloud services.
-The client libraries integrate with Google Cloud authentication mechanisms, such as Application Default Credentials (ADC) and service account key files. This allows your application to authenticate and authorize with Google Cloud services seamlessly.
+The `GOOGLE_APPLICATION_CREDENTIALS` environment variable is used by various Google Cloud client libraries and command-line tools to authenticate and authorize access to Google Cloud services. It specifies the path to the service account key file, also known as the Application Default Credentials (ADC) file.
 
-To configure the local environment to use Application Default Credentials (ADC) authentication for Google Cloud services, follow these steps:
+Here's how it works:
 
-1. Set up your Google Cloud project:
-   - Create a new project or use an existing project in the Google Cloud Console (https://console.cloud.google.com/).
-   - Enable the necessary APIs for the services you want to use. For example, enable the Cloud Storage API if you're working with Google Cloud Storage.
-   - Create a service account:
-     - Go to the "IAM & Admin" section in the Cloud Console.
-     - Select "Service Accounts" and click on "Create Service Account".
-     - Provide a name and optional description for the service account.
-     - Assign the desired roles to the service account based on the permissions it needs. For example, if you're using Cloud Storage, you can assign the "Storage Object Admin" or "Storage Object Viewer" role.
-     - Choose the key type (JSON is recommended) and click on "Create" to generate and download the service account key file (credentials file). This file contains the necessary credentials for authentication.
-   - Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to point to the path of the downloaded service account key file. This variable tells the client libraries where to find the credentials. For example, you can set it in your terminal session or add it to your project's configuration file:
-     - Linux/Mac:
-       ```
-       export GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/credentials.json
-       ```
-2. Initialize the client library with ADC:
-   - In your code, initialize the Google Cloud client library for the service you're using. The library will automatically detect the `GOOGLE_APPLICATION_CREDENTIALS` environment variable and use the specified credentials for authentication.
-   - Each client library may have its own initialization method. Consult the documentation of the specific library you're using for the initialization steps.
+1. Service Account Key File: To authenticate with Google Cloud services, you need a service account key file. This file contains the necessary information to identify and authorize your application to access Google Cloud resources. It typically includes a private key, client email, and other metadata.
+   Example:
 
-By following these steps, your local environment will be configured to use ADC authentication, and the client libraries will automatically authenticate requests to Google Cloud services using the provided service account credentials.
+   - ([cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com](mailto:cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com)).
+   - Generate a service account key file for the selected service account.
+   - Download the key file in JSON format to your local machine.
+
+2. Setting the Environment Variable: By setting the `GOOGLE_APPLICATION_CREDENTIALS` environment variable, you provide the path to the service account key file on your local machine. The Google Cloud client libraries and tools check this variable to locate the credentials file when making API calls.
+
+3. Automatic Authentication: When your application or tool attempts to access Google Cloud services using the client libraries or tools, they automatically look for the `GOOGLE_APPLICATION_CREDENTIALS` environment variable. If the variable is set, the library or tool uses the specified credentials file to authenticate your application and authorize access to the requested resources.
+
+4. Authorization and Access Control: The credentials file contains the necessary permissions and roles assigned to the service account. This determines what actions your application can perform and which resources it can access within your Google Cloud project.
+
+By properly setting the `GOOGLE_APPLICATION_CREDENTIALS` environment variable, you ensure that the Google Cloud client libraries and tools can authenticate your application and interact with Google Cloud services on your behalf.
+
+To set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable within Visual Studio Code (VSC) to only affect the environment within that specific IDE session:
+
+1. Set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable in a terminal you can use the following command:
+
+Linux/Mac:
+
+```
+export GOOGLE_APPLICATION_CREDENTIALS=/path/to/keyfile.json
+```
+
+To echo the value of the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable in a terminal you can use the following command:
+
+Linux/Mac:
+
+```
+echo $GOOGLE_APPLICATION_CREDENTIALS
+```
+
+To unset the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable in a terminal, you can use the following command:
+
+Linux/Mac:
+
+```
+unset GOOGLE_APPLICATION_CREDENTIALS
+```
+
+To set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable **globally for all command prompt or terminal sessions**, you'll need to modify the environment variables configuration of your operating system. The exact steps may vary depending on your operating system. Here are the general instructions for the most common operating systems:
+
+On Linux or macOS:
+
+1. Open a terminal.
+2. Locate the file that sets the environment variables for your shell. This file can vary based on the shell you are using. Common files include `~/.bashrc`, `~/.bash_profile`, `~/.zshrc`, or `/etc/profile`.
+3. Open the file in a text editor with administrative privileges (e.g., using `sudo`).
+4. Add the following line to the file, specifying the path to your service account key file:
+
+   ```
+   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
+   ```
+
+   Replace `/path/to/service-account-key.json` with the actual path to your service account key file.
+
+5. Save the file.
+6. Restart your terminal or run the `source` command to reload the environment variables in your current session.
 
 ## Running App Locally
 
@@ -228,19 +266,19 @@ pnpm install
 pnpm run dev
 ```
 
-## run Docker container
+### run Docker container
 
-### Docker:
+#### Docker:
 
 Docker is a platform that allows you to build, package, and distribute applications using containerization. You can download and install Docker from the official website based on your operating system: [Docker](https://www.docker.com/get-started)
 A Dockerfile sets up a Node.js environment, installs dependencies, copies the application code, builds the Next.js application, exposes port 3000, and starts the application.
 
-### Docker Compose
+#### Docker Compose
 
 Docker Compose is a tool that allows you to define and manage multi-container Docker applications. It simplifies the process of running multiple interconnected containers as a single application.
 Using Docker Compose, you can easily spin up your entire application stack with a single command. It handles the orchestration and provisioning of containers, networks, and volumes, making it convenient for development, testing, and even production deployments.
 
-### Docker Desktop
+#### Docker Desktop
 
 Docker Desktop is a software application that provides an easy-to-use graphical interface and toolset for working with Docker containers on your local machine. It is available for both Windows and macOS operating systems. [Download](https://www.docker.com/products/docker-desktop)
 
@@ -288,7 +326,7 @@ minikube start
 
 ```
 
-2. run script
+3. run script
 
 ```
 cd scripts
@@ -319,3 +357,5 @@ OR (WIP) run a package.json script called "k8s" which will start a minikube, set
 ```
 pnpm run k8s
 ```
+
+The output of `k8s` will be displayed in the terminal to confirm failure or success of setting a Kubernetes secret using shell "scripts\k8s-secrets.sh"; after which, Cloud Code\Run Kubernetes should launch

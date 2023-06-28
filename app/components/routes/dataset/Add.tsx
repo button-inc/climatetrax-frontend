@@ -59,6 +59,7 @@ export default function Page({ endpoint }: GraphqlEndPoint) {
           method: "POST",
           body: formData,
         });
+
         // 👇️ display response message
         if (response.ok) {
           const successMessage = t("messages.successes.upload");
