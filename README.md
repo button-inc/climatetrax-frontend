@@ -22,7 +22,7 @@ To quote the [Rush](https://rushjs.io/) team:
 
 > Microsoft uses pnpm in Rush repos with hundreds of projects and hundreds of PRs per day, and we’ve found it to be very fast and reliable.
 
-## PNPM Background
+### PNPM Background
 
 pnpm uses a content-addressable filesystem to store all files from all module directories on a disk.
 When using npm, if you have 100 projects using lodash, you will have 100 copies of lodash on disk.
@@ -38,7 +38,7 @@ As a result, you save gigabytes of space on your disk and you have a lot faster 
 If you'd like more details about the unique `node_modules` structure that pnpm creates and
 why it works fine with the Node.js ecosystem, read this small article: [Flat node_modules is not the only way](https://pnpm.io/blog/2020/05/27/flat-node-modules-is-not-the-only-way).
 
-## Getting Started
+### Getting Started
 
 [Install PNPM](https://pnpm.io/installation), if you haven’t already:
 
@@ -84,7 +84,7 @@ pnpm add package-name
 
 to install the latest version of package-name from the npm registry by default.
 
-# Next.js 13
+## Next.js 13
 
 [Next.js 13](https://nextjs.org/blog/next-13-4) introduced a new file-system based router which works in a new directory named app.
 
@@ -131,7 +131,7 @@ pnpm run prettier
 Next.js [Middleware ](https://nextjs.org/docs/advanced-features/middleware) allows control over requests before they are completed. Responses can be modified based on conditions such as authentication session or language detection along with implementing persistence via cookie. To create secured routes in Next.js, middleware functions are required to authenticate and authorize the requests made to the route before allowing access to it.
 ClimateTrax uses higher-order functions to create middleware functions with a utility function that uses recursion of separated the logical functions; such as, withLocalization, withResponse that manage the localization prefix; headers and cookies for translation management.
 
-# i18next
+## i18next
 
 Multi-lingual functionality within the Next.js app directory is realized using [i18next](https://www.i18next.com).
 
@@ -140,12 +140,12 @@ docker ps
 ClimateTrax uses middlewares and i18n libraries to manage locale setting and translations so that the i18n instance performs cascading lookups of json files in a i18n\locale folder based on region specific to broader language default structure:
 
 **File structure:**
-│   ├── i18n
-│   │   └── locales
-│   │   └── en
-│   │   └── home.json
-│   │   └── en-US
-│   │   └── home.json
+│ ├── i18n
+│ │ └── locales
+│ │ └── en
+│ │ └── home.json
+│ │ └── en-US
+│ │ └── home.json
 
 **en\home.json**
 
@@ -176,16 +176,81 @@ ClimateTrax uses middlewares and i18n libraries to manage locale setting and tra
 - /fr
 - /fr-CA
 
-# NextAuth.js
+## NextAuth.js
 
 Authentication and authorization functionality is realized using NextAuth.js, an open source community project.
 See [NextAuth.js repo](https://github.com/nextauthjs/next-auth) to learn more.
 
 Within ClimateTrax, the next-auth functionality lies within folder `app\api\[...nextauth]\route.ts` and is managed within `middleware.ts` and `middlewares\withAuthorization.ts`
 
-# Running App Locally
+## `GOOGLE_APPLICATION_CREDENTIALS`
 
-## run dev server
+The `GOOGLE_APPLICATION_CREDENTIALS` environment variable is used by various Google Cloud client libraries and command-line tools to authenticate and authorize access to Google Cloud services. It specifies the path to the service account key file, also known as the Application Default Credentials (ADC) file.
+
+Here's how it works:
+
+1. Service Account Key File: To authenticate with Google Cloud services, you need a service account key file. This file contains the necessary information to identify and authorize your application to access Google Cloud resources. It typically includes a private key, client email, and other metadata.
+   Example:
+
+   - ([cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com](mailto:cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com)).
+   - Generate a service account key file for the selected service account.
+   - Download the key file in JSON format to your local machine.
+
+2. Setting the Environment Variable: By setting the `GOOGLE_APPLICATION_CREDENTIALS` environment variable, you provide the path to the service account key file on your local machine. The Google Cloud client libraries and tools check this variable to locate the credentials file when making API calls.
+
+3. Automatic Authentication: When your application or tool attempts to access Google Cloud services using the client libraries or tools, they automatically look for the `GOOGLE_APPLICATION_CREDENTIALS` environment variable. If the variable is set, the library or tool uses the specified credentials file to authenticate your application and authorize access to the requested resources.
+
+4. Authorization and Access Control: The credentials file contains the necessary permissions and roles assigned to the service account. This determines what actions your application can perform and which resources it can access within your Google Cloud project.
+
+By properly setting the `GOOGLE_APPLICATION_CREDENTIALS` environment variable, you ensure that the Google Cloud client libraries and tools can authenticate your application and interact with Google Cloud services on your behalf.
+
+To set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable within Visual Studio Code (VSC) to only affect the environment within that specific IDE session:
+
+1. Set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable in a terminal you can use the following command:
+
+Linux/Mac:
+
+```
+export GOOGLE_APPLICATION_CREDENTIALS=/path/to/keyfile.json
+```
+
+To echo the value of the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable in a terminal you can use the following command:
+
+Linux/Mac:
+
+```
+echo $GOOGLE_APPLICATION_CREDENTIALS
+```
+
+To unset the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable in a terminal, you can use the following command:
+
+Linux/Mac:
+
+```
+unset GOOGLE_APPLICATION_CREDENTIALS
+```
+
+To set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable **globally for all command prompt or terminal sessions**, you'll need to modify the environment variables configuration of your operating system. The exact steps may vary depending on your operating system. Here are the general instructions for the most common operating systems:
+
+On Linux or macOS:
+
+1. Open a terminal.
+2. Locate the file that sets the environment variables for your shell. This file can vary based on the shell you are using. Common files include `~/.bashrc`, `~/.bash_profile`, `~/.zshrc`, or `/etc/profile`.
+3. Open the file in a text editor with administrative privileges (e.g., using `sudo`).
+4. Add the following line to the file, specifying the path to your service account key file:
+
+   ```
+   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
+   ```
+
+   Replace `/path/to/service-account-key.json` with the actual path to your service account key file.
+
+5. Save the file.
+6. Restart your terminal or run the `source` command to reload the environment variables in your current session.
+
+## Running App Locally
+
+### run dev server
 
 1. Install all dependencies for a project (run command from the folder relative to the package.json file):
 
@@ -201,19 +266,19 @@ pnpm install
 pnpm run dev
 ```
 
-## run Docker container
+### run Docker container
 
-### Docker:
+#### Docker:
 
 Docker is a platform that allows you to build, package, and distribute applications using containerization. You can download and install Docker from the official website based on your operating system: [Docker](https://www.docker.com/get-started)
 A Dockerfile sets up a Node.js environment, installs dependencies, copies the application code, builds the Next.js application, exposes port 3000, and starts the application.
 
-### Docker Compose
+#### Docker Compose
 
 Docker Compose is a tool that allows you to define and manage multi-container Docker applications. It simplifies the process of running multiple interconnected containers as a single application.
 Using Docker Compose, you can easily spin up your entire application stack with a single command. It handles the orchestration and provisioning of containers, networks, and volumes, making it convenient for development, testing, and even production deployments.
 
-### Docker Desktop
+#### Docker Desktop
 
 Docker Desktop is a software application that provides an easy-to-use graphical interface and toolset for working with Docker containers on your local machine. It is available for both Windows and macOS operating systems. [Download](https://www.docker.com/products/docker-desktop)
 
@@ -254,18 +319,7 @@ File structure for local k8s cluster:
 
 When running the app in minikube the process.env.\* reflect Kubernetes secrets. To set the Kubernetes secrets from GCP Secret using scripts\k8s-secrets.sh:
 
-1. Set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable:
-
-   - Go to the GCP Console and navigate to the IAM & Admin service account ([cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com](mailto:cloud-build-sa@emissions-elt-demo.iam.gserviceaccount.com)).
-   - Generate a service account key file for the selected service account.
-   - Download the key file in JSON format to your local machine.
-   - Set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable to the path of the key file.
-
-   ```
-   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/keyfile.json
-   ```
-
-2. Start k8s minikube:
+1. Start k8s minikube:
 
 ```
 minikube start
