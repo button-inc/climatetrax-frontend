@@ -14,10 +14,8 @@ async function uploadFileToStorage(
 ): Promise<void> {
   const bucket = storage.bucket(bucketName);
   const fileToUpload = bucket.file(destinationFileName);
-
   const readStream = new Readable();
   readStream._read = () => {};
-
   readStream.push(fileBuffer);
   readStream.push(null);
   try {
@@ -40,19 +38,17 @@ async function uploadFileToStorage(
         (error.hasOwnProperty("code") && (error as any).code === 401) ||
         (error as any).code === 403
       ) {
-        // Authentication error occurred
+        // 👇️ authentication error occurred
         console.error("Authentication error:", error);
-        // Perform specific error handling for authentication errors
       } else {
-        // Other types of errors
+        // 👇️ other types of errors
         console.error("Error during file upload:", error);
-        // Perform general error handling
       }
     } else {
       console.error("Error during file upload:", error);
-      // Perform general error handling for unknown errors
     }
-    throw error; // Re-throw the error to propagate it further if needed
+    // 👇️ re-throw the error to propagate it further
+    throw error;
   }
 }
 
@@ -60,41 +56,65 @@ async function uploadFileToStorage(
 export default async function handler(request: NextRequest) {
   let message = "Uploading file...";
   let success = true;
-
-  // 👇️ get file from request formdata
   if (request.body) {
+    // 👇️ get file from request formdata
     const formData = await request.formData();
     const uploadedFile = formData.get("uploadedFile");
-
     if (uploadedFile && uploadedFile instanceof Blob) {
-      const fileBuffer = await uploadedFile.arrayBuffer();
-      const destinationFileName = uploadedFile.name;
-      try {
-        // 👇️ bucket file configurations
-        const options = {
-          resumable: true,
-          gzip: true,
-          contentType: uploadedFile.type,
-          metadata: {
-            customMetadata: {
-              key1: "value1",
-              key2: "value2",
+      //console.log(uploadedFile);
+      //console.dir(uploadedFile);
+      // 👇️ check file type
+      const fileType = uploadedFile.type;
+      let isValidFileType = false;
+
+      switch (fileType) {
+        case "application/json":
+        case "application/vnd.ms-excel":
+        case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+        case "text/csv":
+        case "text/xml":
+          // 👍
+          isValidFileType = true;
+          break;
+        default:
+          // 👎
+          success = false;
+          break;
+      }
+      if (isValidFileType) {
+        // 👇️ binary data operations
+        const fileBuffer = await uploadedFile.arrayBuffer();
+        const destinationFileName = uploadedFile.name;
+        const userName = formData.get("userName");
+        try {
+          // 👇️ bucket file configurations
+          const options = {
+            resumable: true,
+            gzip: true,
+            contentType: fileType,
+            metadata: {
+              customMetadata: {
+                userName: userName,
+              },
             },
-          },
-        };
-        // 👇️ persist uploaded file to GCS bucket
-        await uploadFileToStorage(
-          Buffer.from(fileBuffer),
-          destinationFileName,
-          options
-        );
-        message = "File uploaded successfully";
-      } catch (err) {
-        message = "Failed to upload file. " + err;
+          };
+          // 👇️ persist uploaded file to GCS bucket
+          await uploadFileToStorage(
+            Buffer.from(fileBuffer),
+            destinationFileName,
+            options
+          );
+          message = "File uploaded successfully";
+        } catch (err) {
+          message = "Failed to upload file. " + err;
+          success = false;
+        }
+      } else {
+        message = "unsupported";
         success = false;
       }
     } else {
-      message = "Error: invalid file";
+      message = "Error: invalid file data";
       success = false;
     }
   } else {
