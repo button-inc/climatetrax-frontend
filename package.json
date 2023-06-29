@@ -11,6 +11,7 @@
     "tailwind:watch": "postcss tailwind.css -o styles.css -w"
   },
   "dependencies": {
+    "@google-cloud/storage": "^6.11.0",
     "@graphile-contrib/pg-order-by-related": "^1.0.0",
     "@graphile-contrib/pg-simplify-inflector": "^6.1.0",
     "@graphile/pg-aggregates": "^0.1.1",
@@ -30,6 +31,8 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "^7.32.2",
+    "fetch-blob": "^4.0.0",
+    "formdata-polyfill": "^4.0.10",
     "graphql-request": "^5.2.0",
     "i18next": "^22.5.1",
     "i18next-browser-languagedetector": "7.0.1",
@@ -47,6 +50,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-i18next": "12.1.1",
+    "stream": "^0.0.2",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4"
   },

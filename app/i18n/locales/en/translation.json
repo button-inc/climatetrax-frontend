@@ -76,12 +76,10 @@
   },
   "dataset": {
     "add": {
-      "csv": "CSV",
       "emailTo": "faker@fakeemail.com",
       "emailSubject": "ClimateTrax: Add new dataset request",
       "emailBody": "Request for new data connection:",
-      "google": "Google Sheets",
-      "json": "JSON",
+      "file": "Upload a new dataset",
       "request": "Request a new dataset",
       "tag": "Add a new dataset"
     },
@@ -227,8 +225,19 @@
     }
   },
   "messages": {
-    "error": "Ops, something went wrong!",
-    "notfound": "Page cannot be found.",
-    "unauth": "Ops, you do not seem to have access to this area."
+    "errors": {
+      "error": "Ops, something went wrong!",
+      "label": "Attention:",
+      "notfound": "Page cannot be found.",
+      "unauth": "Ops, you do not seem to have access to this area.",
+      "upload": {
+        "generic": "An error occurred in file upload. The error has been logged.",
+        "unsupported": "File type is not supported."
+      }
+    },
+    "successes": {
+      "label": "Success:",
+      "upload": "File uploaded."
+    }
   }
 }

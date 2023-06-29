@@ -6,7 +6,7 @@ export default function Page() {
   const { t } = useTranslation("translation");
   return (
     <>
-      <h1>⛔️ {t("messages.unauth")}</h1>
+      <h1>⛔️ {t("messages.errors.unauth")}</h1>
     </>
   );
 }
