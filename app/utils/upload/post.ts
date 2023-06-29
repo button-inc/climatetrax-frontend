@@ -93,7 +93,7 @@ export default async function handler(request: NextRequest) {
             gzip: true,
             contentType: fileType,
             metadata: {
-              customMetadata: {
+              metadata: {
                 userName: userName,
               },
             },
