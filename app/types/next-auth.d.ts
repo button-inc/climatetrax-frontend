@@ -16,7 +16,12 @@ declare module "next-auth" {
     } & DefaultSession["user"];
   }
 }
-
+declare module "next-auth" {
+  interface User {
+    // 👇️ Module augmentation to add 'role' definition to the User object
+    role: string;
+  }
+}
 declare module "next-auth/jwt" {
   // 👇️ Module augmentation to add 'role' definition to the JWT
   interface JWT {
