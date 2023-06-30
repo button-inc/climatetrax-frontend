@@ -30,21 +30,25 @@ export default function Page() {
   if (typeof window !== "undefined") {
     hostUrl = window.location.origin;
   }
+  // 👇️ nextauth signin calback url
   const callbackUrl =
     hostUrl && hostUrl.includes("http://localhost:4503")
       ? "http://localhost:3000"
       : process.env.NEXTAUTH_URL || "http://localhost:3000";
+
+  // 👇️ nextauth provider signin
+  const handleSignIn = async (providerId: string) => {
+    await signIn(providerId, {
+      callbackUrl,
+    });
+  };
 
   const content = data
     ? Object.values(data).map((provider: ClientSafeProvider) => (
         <div key={provider.id} className={styles.provider}>
           <button
             className={styles.button}
-            onClick={() =>
-              signIn(provider.id, {
-                callbackUrl,
-              })
-            }
+            onClick={() => handleSignIn(provider.id)}
           >
             <img
               alt={provider.name}

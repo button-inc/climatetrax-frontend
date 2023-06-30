@@ -59,10 +59,8 @@ export default async function handler(request: NextRequest) {
   if (request.body) {
     // 👇️ get file from request formdata
     const formData = await request.formData();
-    const uploadedFile = formData.get("uploadedFile");
-    if (uploadedFile && uploadedFile instanceof Blob) {
-      //console.log(uploadedFile);
-      //console.dir(uploadedFile);
+    const uploadedFile = formData.get("uploadedFile") as Blob;
+    if (uploadedFile) {
       // 👇️ check file type
       const fileType = uploadedFile.type;
       let isValidFileType = false;
@@ -93,7 +91,7 @@ export default async function handler(request: NextRequest) {
             gzip: true,
             contentType: fileType,
             metadata: {
-              customMetadata: {
+              metadata: {
                 userName: userName,
               },
             },
