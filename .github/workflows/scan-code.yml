@@ -30,7 +30,9 @@ jobs:
               ignore-unfixed: false
               severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
               timeout: 10m0s
-          - name: Upload Trivy scan results as artifact
+          - name: Upload Trivy scan results as artifact 
+           # can't use the Advanced Security feature for the result uploading
+           # as it is only for a public repo or a private repo within GitHub Enterprise 
             uses: actions/upload-artifact@v2
             with:
               name: trivy-results
