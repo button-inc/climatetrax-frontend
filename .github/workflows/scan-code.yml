@@ -1,5 +1,5 @@
 # Tests that rely on the committed code, without needing the docker images to be built
-name: SCAN ClimateTrax FE
+name: Scan ClimateTrax FE
 
 on: [push]
 
@@ -14,6 +14,12 @@ jobs:
         steps:
           - name: Checkout code
             uses: actions/checkout@v3
+          - name: Cache Scan Dependencies
+            uses: actions/cache@v2
+            with:
+              path: ~/.cache/trivy
+              key: ${{ github.workflow }}-${{ github.run_id }}
+              restore-keys: trivy-
           - name: Run Trivy vulnerability scanner in repo mode
             uses: aquasecurity/trivy-action@master
             with:
