@@ -42,10 +42,10 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
-        - name: dev env setup
-          uses: ./.github/actions/dev-env-setup
-        - run: make install_dev_tools
-        - run: make stop_pg # cleanly stop the database, otherwise it will complain in the subsequent jobs
+        - name: Set up Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: '14' # change this to the Node.js version your project uses
         - run: yarn install --frozen-lockfile --check-files
           working-directory: ./app              
 
@@ -54,48 +54,14 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
-        - name: dev env setup
-          uses: ./.github/actions/dev-env-setup
-        - name: set pre-commit cache directory
-          run: |
-            echo "PRE_COMMIT_HOME=$GITHUB_WORKSPACE/.pre-commit-cache" >> $GITHUB_ENV
-        - name: set PY
-          run: echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV
-        - name: create commitlint COMMIT_EDITMSG if not exists
-          run: |
-            if test -f ".git/COMMIT_EDITMSG"; then
-                echo "COMMIT_EDITMSG EXISTS, skipping"
-            else
-                touch .git/COMMIT_EDITMSG
-            fi
+        - uses: actions/setup-node@v2
+          with:
+            node-version: '14' # change this to the Node.js version your project uses
         - uses: actions/cache@v2
           with:
             path: |
-              ./.pre-commit-cache
-            key: pre-commit-${{ env.PY }}-${{ hashFiles('.pre-commit-config.yaml') }}
-        - run: pre-commit run --all-files --color=always --show-diff-on-failure    
-    # cannot use
-    # only open to public repo or private one under GH enterprise          
-    # codeql-scan:
-    #   name: codeql-scan
-    #   runs-on: ubuntu-latest
-    #   permissions:
-    #     actions: read
-    #     contents: read
-    #     security-events: write
-    #   strategy:
-    #     fail-fast: false
-    #     matrix:
-    #       language: ["javascript"]
-    #       os: ["linux"]
-    #   steps:
-    #     - name: Checkout repository
-    #       uses: actions/checkout@v2
-    #     - name: Initialize CodeQL
-    #       uses: github/codeql-action/init@v2
-    #       with:
-    #         languages: ${{ matrix.language }}
-    #     - name: Autobuild
-    #       uses: github/codeql-action/autobuild@v2
-    #     - name: Perform CodeQL Analysis
-    #       uses: github/codeql-action/analyze@v2
+              ~/.npm
+            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{ runner.os }}-node-
+        - run: npx pre-commit run --all-files --color=always --show-diff-on-failure    
