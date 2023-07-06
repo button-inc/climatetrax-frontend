@@ -37,3 +37,16 @@ jobs:
             with:
               name: trivy-results
               path: trivy-results.sarif
+          
+    codeql-scan:
+      name: codeql-scan
+      runs-on: ubuntu-latest
+      permissions:
+        actions: read
+        contents: read
+        security-events: write
+      strategy:
+        fail-fast: false
+        matrix:
+          language: ["javascript"]
+          os: ["linux"]
