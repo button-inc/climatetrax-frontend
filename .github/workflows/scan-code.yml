@@ -47,9 +47,9 @@ jobs:
           with:
             node-version: '18' # Change this to the Node.js version your project supports
         - run: yarn install --frozen-lockfile --check-files
-          working-directory: ./app              
+          working-directory: ./app
 
-    pre-commit:
+    husky-checks:
       needs: install-dev-tools
       runs-on: ubuntu-latest
       steps:
@@ -64,8 +64,7 @@ jobs:
             key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
             restore-keys: |
               ${{ runner.os }}-node-
-        - run: yarn install # Ensuring all dev dependencies including pre-commit are installed
+        - run: yarn install # Ensuring all dev dependencies including Husky are installed
           working-directory: ./app
-        - run: npx pre-commit run --all-files --color=always --show-diff-on-failure
-
-          
+        - run: npm run lint
+          working-directory: ./app
