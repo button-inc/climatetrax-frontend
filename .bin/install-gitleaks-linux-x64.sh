@@ -1,59 +1,47 @@
 #!/usr/bin/env bash
 set -xeuo pipefail;
 
-releases_api="https://api.github.com/repos/gitleaks/gitleaks/releases/latest"
-releases_json="$(curl -s ${releases_api})"
-version=$(echo "${releases_json}" | jq -r ".name" | cut -c 2-) #Extracts the version from the json
+version="8.12.0";
+releases_api="https://api.github.com/repos/zricethezav/gitleaks/releases/latest";
+releases_json="$(curl -s ${releases_api})";
 
-# Detect OS architecture and set the arch variable
-case "$(uname -m)" in
-  'amd64')   arch="x64" ;;
-  'x86_64')  arch="x64" ;;
-  'i386')    arch="x32" ;;
-  'i686')    arch="x32" ;;
-  'armv6')   arch="armv6" ;;
-  'armv7')   arch="armv7" ;;
-  *)         echo "unsupported architecture"; exit 1 ;;
+case "$OSTYPE" in
+  darwin*)  arch="darwin_x64" ;; # arm detection? I give up
+  linux*)   arch="linux_x64" ;;
+  solaris*) echo "Error: Solaris is not supported"; exit 1; ;;
+  bsd*)     echo "Error: BSD is not supported"; exit 1; ;;
+  msys*)    echo "Error: Windows is not supported"; exit 1; ;;
+  cygwin*)  echo "Error: Windows is still not supported"; exit 1; ;;
+  *)        echo "Error: unknown: $OSTYPE – definitely not supported"; exit 1; ;;
 esac
 
-# Detect OS type and set the os variable
-case "$(uname -s)" in
-  Linux*)    os="linux" ;;
-  Darwin*)   os="darwin" ;;
-  CYGWIN*)   os="windows" ;;
-  MINGW*)    os="windows" ;;
-  MSYS*)     os="windows" ;;
-  *)         echo "unsupported OS"; exit 1 ;;
-esac
 
-# Construct the filename to search for in the API response
-filename="gitleaks_${version}_${os}_${arch}.zip"
-
-# Debugging lines: echo variables
-echo "Version: ${version}"
-echo "OS: ${os}"
-echo "Arch: ${arch}"
-echo "Filename: ${filename}"
-
-# Find the download URL for the desired asset
-download_url=$(echo "${releases_json}" | jq -r ".assets[] | select(.name==\"${filename}\") | .browser_download_url")
-
-# Check if download URL is found
-if [ -z "${download_url}" ]; then
-  echo "Could not find a download URL for ${filename}"
-  exit 1
+# error if the specified release isn't latest
+if (echo "${releases_json}" | jq -e "(.name != \"v${version}\")"); then
+  echo "Error: the latest version of gitleaks is $(echo "${releases_json}" | jq "(.name)")";
+  exit 1;
 fi
 
-# Echo the download URL
-echo "Download URL: ${download_url}"
+# download the specified release
+download_url=$(echo "${releases_json}" | jq -r ".assets[] | select(.name | contains(\"${arch}\")) | .browser_download_url");
+wget "${download_url}";
 
-# Download the asset
-wget "${download_url}"
+# validate checksum
+download_url=$(echo "${releases_json}" | jq -r ".assets[] | select(.name | contains(\"checksums\")) | .browser_download_url");
+wget "${download_url}";
+sed -i.bak -n "/${arch}/p" gitleaks_${version}_checksums.txt
+shasum -a 256 "gitleaks_${version}_checksums.txt" --check;
 
-# Extract the zip file
-unzip "gitleaks_${version}_${os}_${arch}.zip"
+# extract to current working directory
+tar -zxvf "gitleaks_${version}_${arch}.tar.gz" gitleaks;
 
-# Cleanup
-rm "gitleaks_${version}_${os}_${arch}.zip"
+# check version
+if [[ "$(./gitleaks version)" != "${version}" ]]; then
+  echo "Somehow we installed the wrong version...";
+  exit 1;
+fi
+
+# cleanup
+rm gitleaks_*;
 
 exit 0;
