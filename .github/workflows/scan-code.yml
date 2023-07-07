@@ -86,8 +86,11 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
+        - name: Set execute permissions for install script
+          run: chmod +x ./.bin/install-gitleaks-linux-x64.sh
         - run: ./.bin/install-gitleaks-linux-x64.sh
         - run: ./gitleaks detect --exit-code 0 --report-format sarif --report-path "gitleaks.sarif"
         - uses: github/codeql-action/upload-sarif@v2
           with:
             sarif_file: 'gitleaks.sarif'
+        
