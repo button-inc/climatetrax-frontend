@@ -81,3 +81,13 @@ jobs:
           working-directory: ./app
         - run: npm run lint
           working-directory: ./app
+
+    gitleaks:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - run: ./.bin/install-gitleaks-linux-x64.sh
+        - run: ./gitleaks detect --exit-code 0 --report-format sarif --report-path "gitleaks.sarif"
+        - uses: github/codeql-action/upload-sarif@v2
+          with:
+            sarif_file: 'gitleaks.sarif'
