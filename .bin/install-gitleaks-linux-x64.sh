@@ -2,11 +2,11 @@
 set -xeuo pipefail;
 
 version="8.12.0";
-releases_api="https://api.github.com/repos/zricethezav/gitleaks/releases/latest";
+releases_api="https://api.github.com/repositories/119190187/releases/latest"; #Updated URL
 releases_json="$(curl -s ${releases_api})";
 
 case "$OSTYPE" in
-  darwin*)  arch="darwin_x64" ;; # arm detection? I give up
+  darwin*)  arch="darwin_x64" ;; 
   linux*)   arch="linux_x64" ;;
   solaris*) echo "Error: Solaris is not supported"; exit 1; ;;
   bsd*)     echo "Error: BSD is not supported"; exit 1; ;;
@@ -14,7 +14,6 @@ case "$OSTYPE" in
   cygwin*)  echo "Error: Windows is still not supported"; exit 1; ;;
   *)        echo "Error: unknown: $OSTYPE – definitely not supported"; exit 1; ;;
 esac
-
 
 # error if the specified release isn't latest
 if (echo "${releases_json}" | jq -e "(.name != \"v${version}\")"); then
