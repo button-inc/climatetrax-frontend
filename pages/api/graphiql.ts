@@ -6,8 +6,8 @@ const databaseSchemaAdmin = process.env.DATABASE_SCHEMA_ADMIN || "";
 const databaseSchemaClean = process.env.DATABASE_SCHEMA_CLEAN || "";
 const databaseSchemaWorkspace = process.env.DATABASE_SCHEMA_WORKSPACE || "";
 const databasePW = "fake_pw_to_test_gitleak";
-const FAKE_AWS_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE4";
-const FAKE_AWS_SECRET_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY4";
+const FAKE_AWS_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE5";
+const FAKE_AWS_SECRET_KEY = "wJalrXUtnFEMI/K7MDENG/bPxSRfiCYEXAMPLEKEY5";
 
 
 const requestHandler = postgraphile(
