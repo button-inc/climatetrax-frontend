@@ -543,6 +543,11 @@ regex = '''(?is)((key|api|token|secret|password)[a-z0-9_ .\-,]{0,50})\s*(=|>|:=|
 entropy = 3.7
 secretGroup = 4
 
+[[rules]]
+description = "Database password"
+regex = '''databasePW\s*=\s*".*?"'''
+tags = ["database", "password"]
+
 [allowlist]
 description = "global allow lists"
 regexes = ['''(example_regex)''']
