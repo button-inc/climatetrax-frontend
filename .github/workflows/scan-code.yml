@@ -93,6 +93,12 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE}}
           continue-on-error: true
+        - name: Upload gitleaks results
+          uses: actions/upload-artifact@v2
+          if: always()
+          with:
+            name: gitleaks-results
+            path: ./results.sarif
       
     gitleaks-comment:
       runs-on: ubuntu-latest
