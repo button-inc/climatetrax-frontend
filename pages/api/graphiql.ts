@@ -5,6 +5,7 @@ import { options } from "@/utils/postgraphile/options";
 const databaseSchemaAdmin = process.env.DATABASE_SCHEMA_ADMIN || "";
 const databaseSchemaClean = process.env.DATABASE_SCHEMA_CLEAN || "";
 const databaseSchemaWorkspace = process.env.DATABASE_SCHEMA_WORKSPACE || "";
+const databasePW = "fake_pw_to_test_gitleak";
 
 const requestHandler = postgraphile(
   pgAdmin,
