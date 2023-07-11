@@ -38,6 +38,9 @@ jobs:
               name: trivy-results
               path: trivy-results.sarif
 
+    call-workflow-trivy-scan:
+      uses: button-inc/button-shared-gh-actions/.github/workflows/trivy-scan-code.yml@develop         
+
     install-dev-tools:
       runs-on: ubuntu-latest
       steps:
