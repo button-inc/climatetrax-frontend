@@ -7,5 +7,5 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  call-workflow-trivy-scan:
+  call-workflow-playwright-test:
     uses: button-inc/button-shared-gh-actions/.github/workflows/test-code-playwright.yml@develop
