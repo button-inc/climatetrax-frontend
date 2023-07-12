@@ -3,7 +3,7 @@ name: Scan ClimateTrax FE
 on: [push]
 
 concurrency:
-  group: caller-${{ github.workflow }}-${{ github.ref }}
+  group: CT-caller-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -16,18 +16,14 @@ jobs:
         working-directory: ./app
         node-version: '18' 
 
+    call-workflow-gitleaks-scan:
+      uses: button-inc/button-shared-gh-actions/.github/workflows/scan-code-gitleaks.yml@develop
+      with:
+        notify-user-list: "@shon-button,@YaokunLin"
+      secrets:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        gitleaks-license: ${{ secrets.GITLEAKS_LICENSE}}
 
-    gitleaks: 
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-          with:
-            fetch-depth: 0
-        - uses: gitleaks/gitleaks-action@v2
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE}}
-            GITLEAKS_NOTIFY_USER_LIST: "@shon-button,@YaokunLin"
 
       
     

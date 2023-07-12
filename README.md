@@ -358,4 +358,6 @@ OR (WIP) run a package.json script called "k8s" which will start a minikube, set
 pnpm run k8s
 ```
 
-The output of `k8s` will be displayed in the terminal to confirm failure or success of setting a Kubernetes secret using shell "scripts\k8s-secrets.sh"; after which, Cloud Code\Run Kubernetes should launch 1
+The output of `k8s` will be displayed in the terminal to confirm failure or success of setting a Kubernetes secret using shell "scripts\k8s-secrets.sh"; after which, Cloud Code\Run Kubernetes should launch
+
+<img alt="gitleaks badge" src="https://img.shields.io/badge/protected%20by-gitleaks-blue">
