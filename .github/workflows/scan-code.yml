@@ -1,4 +1,3 @@
-# Tests that rely on the committed code, without needing the docker images to be built
 name: Scan ClimateTrax FE
 
 on: [push]
@@ -9,7 +8,7 @@ concurrency:
 
 jobs:
     call-workflow-trivy-scan:
-      uses: button-inc/button-shared-gh-actions/.github/workflows/trivy-scan-code.yml@develop         
+      uses: button-inc/button-shared-gh-actions/.github/workflows/scan-code-trivy.yml@develop         
 
     install-dev-tools:
       runs-on: ubuntu-latest
