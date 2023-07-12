@@ -12,6 +12,9 @@ jobs:
       
     call-workflow-husky-scan:
       uses: button-inc/button-shared-gh-actions/.github/workflows/scan-code-husky.yml@develop
+      with:
+        working-directory: ./app
+
 
     gitleaks: 
       runs-on: ubuntu-latest
