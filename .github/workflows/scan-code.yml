@@ -23,6 +23,9 @@ jobs:
       secrets:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         gitleaks-license: ${{ secrets.GITLEAKS_LICENSE}}
+    
+    call-workflow-owasp-zap-scan:
+      uses: button-inc/button-shared-gh-actions/.github/workflows/scan-code-owasp-zap.yml@develop
 
 
       
