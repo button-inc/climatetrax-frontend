@@ -21,8 +21,8 @@ jobs:
       with:
         notify-user-list: "@shon-button,@YaokunLin"
       secrets:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE}}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        gitleaks-license: ${{ secrets.GITLEAKS_LICENSE}}
 
 
       
