@@ -8,4 +8,4 @@ concurrency:
 
 jobs:
   call-workflow-playwright-test:
-    uses: button-inc/button-shared-gh-actions/.github/workflows/test-code-playwright.yml@develop
+    uses: button-inc/gh-actions/.github/workflows/test-code-playwright.yml@develop
