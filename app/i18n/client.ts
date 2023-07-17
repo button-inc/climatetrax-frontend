@@ -1,6 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import { useTranslation } from "next-i18next";  //import from next-i18next instead of react-i18next prevents error "NextJS+NextI18Next hydration error when trying to map through array: "Text content does not match server-rendered HTML". This is because the response of serverSideTranslations is a custom object with _nextI18Next property. 
+import { useTranslation } from "next-i18next";  //import from next-i18next instead of react-i18next prevents error "NextJS+NextI18Next hydration error when trying to map through array: "Text content does not match server-rendered HTML". This is because the response of serverSideTranslations is a custom object with _nextI18Next property.
 import resourcesToBackend from "i18next-resources-to-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { getOptions } from "./settings";

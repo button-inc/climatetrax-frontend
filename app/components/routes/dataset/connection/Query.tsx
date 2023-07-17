@@ -1,4 +1,4 @@
-import { getQueryData } from "@/utils/helpers";
+import { getQueryData } from "@/utils/postgraphile/helpers";
 import ConnectionContainer from "@/components/routes/dataset/connection/Container";
 import { GraphqlQuery } from "@/types/declarations";
 

@@ -1,4 +1,4 @@
-import { getQueryData } from "@/utils/helpers";
+import { getQueryData } from "@/utils/postgraphile/helpers";
 import { GraphqlQuery } from "@/types/declarations";
 import dynamic from "next/dynamic";
 //👇️ will not be rendered on the server, prevents error: Text content did not match. Server

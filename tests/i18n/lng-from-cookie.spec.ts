@@ -1,5 +1,5 @@
 import { test, expect, chromium, BrowserContext, Page } from "@playwright/test";
-import { fallbackLng } from "../../app/i18n/settings";
+import { fallbackLng } from "../../../app/i18n/settings";
 import { lngs, siteUrl } from "./testUtils";
 
 const cookieName = "i18next";

@@ -11,9 +11,13 @@ const requestHandler = postgraphile(
   [databaseSchemaAdmin, databaseSchemaClean, databaseSchemaWorkspace],
   {
     ...options,
-    graphiqlRoute: "/api/graphiql",
-    graphqlRoute: "/api/graphql",
+    graphqlRoute: "/api/postgraphql",
   }
 );
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 export default requestHandler;

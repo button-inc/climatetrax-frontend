@@ -83,6 +83,8 @@ export default function Page({ endpoint }: GraphqlEndPoint) {
             setErrorMessage(errorMessage);
           }
         }
+        // Return the response or any relevant data
+        return response;
       } catch (error: any) {
         setErrorMessage(`An error occurred while uploading: ${error.message}`);
       } finally {
@@ -99,7 +101,9 @@ export default function Page({ endpoint }: GraphqlEndPoint) {
   return (
     <>
       {/* Mask overlay */}
-      {isMasked && <div className="fixed inset-0 bg-[rgba(0,0,0,0.5)] z-50" />}
+      {isMasked && (
+        <div className="--is-masked fixed inset-0 bg-[rgba(0,0,0,0.5)] z-50" />
+      )}
       <Tag tag={"dataset.add.tag"} crumbs={crumbsDatasetAdd}></Tag>
       {/* Tiles */}
       <div className="grid grid-cols-4 gap-4">
@@ -114,7 +118,11 @@ export default function Page({ endpoint }: GraphqlEndPoint) {
             <p>{t("dataset.add.request")}</p>
           </div>
         </div>
-        <div className="card" onClick={() => handleClickInputFile()}>
+        <div
+          data-myFileInput="1"
+          className="card"
+          onClick={() => handleClickInputFile()}
+        >
           <div className="top">
             <img
               alt={t("dataset.add.file") || ""}

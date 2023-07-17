@@ -11,6 +11,9 @@
         "3": "Imported By"
       }
     },
+    "dataset": {
+      "tag": "Anonymized dataset"
+    },
     "datasets": {
       "columns": {
         "0": "Dataset",
@@ -66,6 +69,9 @@
       "tag": "Home"
     },
     "imported": {
+      "dataset": {
+        "tag": "Dataset"
+      },
       "datasets": {
         "tag": "Anonymize a dataset"
       }
@@ -192,6 +198,9 @@
       },
       "tag": "Imported dataset"
     },
+    "dataset": {
+      "tag": "Dataset"
+    },
     "datasets": {
       "columns": {
         "0": "Dataset",
@@ -227,7 +236,7 @@
   "messages": {
     "errors": {
       "error": "Ops, something went wrong!",
-      "label": "Attention:",
+      "label": "Error:",
       "notfound": "Page cannot be found.",
       "unauth": "Ops, you do not seem to have access to this area.",
       "upload": {

@@ -1,0 +1,25 @@
+{
+  "cookies": [
+    {
+      "name": "i18next",
+      "value": "en-US",
+      "domain": "localhost",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "next-auth.session-token",
+      "value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..Sk5Sw0xZUG8HLBCI.RX24eO8DeJzbtIbkfosmbHund4BMOAZ0n-DVtXNTnvBGniSTpH-CSmJyf0wCY1xiyOCUr1-bHr-Zz-gx1cDCZIRyY8eGYpE-6fT09ly_tuaZ5TC9cxOKYDgZ-jHRVQigAD083I7p1f77DLUOWkJKYqH_6Thpwodw-MAeBFVEQNx0sod64zrxfUeuLyz-yPpz09zt-2oe9yh3GDoDEest-YgODArBDIrPliOytDNtElLnYlulZcH6vvWoqQwzG7mtTTdMYUNNvxWVnhkCw8IhvOf0J6m_K-Vc3XCr--KmqGy8EVLvX3QMeGyDorlcNvlOqNoqwZwvn02lKUWpYZzPp-AFe0La4sbSqrNl5yD0NvM-daA.68Oy5_QQGCS4zHl-RImlGQ",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1689713869,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}

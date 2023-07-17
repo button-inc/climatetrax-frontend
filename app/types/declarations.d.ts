@@ -9,6 +9,9 @@ interface DataTableProps {
   columns: any[];
   cntx?: string | null;
 }
+interface GraphqlEndPoint {
+  endpoint: string;
+}
 
 interface GraphqlQuery {
   endpoint: string;
@@ -23,13 +26,8 @@ interface GraphqlResponse {
   };
 }
 
-interface GraphqlEndPoint {
-  endpoint: string;
-}
-
 interface GraphqlParamEndPoint {
   id: string;
-  endpoint: string;
 }
 
 interface TagProps {

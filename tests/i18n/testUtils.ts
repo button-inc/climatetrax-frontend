@@ -9,13 +9,13 @@ export const enLngs = ['en', 'en-CA', 'en-GB', 'en-US', ];
 export const frLngs = ['fr', 'fr-CA'];
 export const lngs = enLngs.concat(frLngs);
 
-export const enUrls = [ 
+export const enUrls = [
   siteUrl + "/en/",
   siteUrl + "/en-CA/",
   siteUrl + "/en-GB/",
   siteUrl + "/en-US/"
   ]
-export const frUrls = [ 
+export const frUrls = [
   siteUrl + "/fr/",
   siteUrl + "/fr-CA/"
 ]
@@ -26,5 +26,3 @@ export async function createPageWithAcceptLanguage(locale: string = ''): Promise
   const page = await context.newPage();
   return { browser, context, page };
 }
-
-

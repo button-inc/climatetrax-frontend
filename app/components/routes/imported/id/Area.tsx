@@ -1,3 +1,4 @@
+import { getSessionRoleEndpoint } from "@/utils/postgraphile/helpers";
 import { Suspense } from "react";
 import { gql } from "graphql-request";
 import Spinner from "@/components/common/Spinner";
@@ -13,7 +14,9 @@ const Tag = dynamic(() => import("@/components/layout/Tag"), {
 });
 // 👇️ used to changes options for @/components/table/DataTable
 const cntx = "dlpAnalysis";
-export default async function Page({ id, endpoint }: GraphqlParamEndPoint) {
+export default async function Page({ id }: GraphqlParamEndPoint) {
+  const endpoint = await getSessionRoleEndpoint();
+
   // 👇️ graphQL query
   const query = gql`
   {

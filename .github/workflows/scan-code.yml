@@ -9,12 +9,12 @@ concurrency:
 jobs:
     call-workflow-trivy-scan:
       uses: button-inc/gh-actions/.github/workflows/scan-code-trivy.yml@develop
-      
+
     call-workflow-husky-scan:
       uses: button-inc/gh-actions/.github/workflows/scan-code-husky.yml@develop
       with:
         working-directory: ./app
-        node-version: '18' 
+        node-version: '18'
 
     call-workflow-gitleaks-scan:
       uses: button-inc/gh-actions/.github/workflows/scan-code-gitleaks.yml@develop
@@ -23,11 +23,8 @@ jobs:
       secrets:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         gitleaks-license: ${{ secrets.GITLEAKS_LICENSE}}
-    
+
     call-workflow-owasp-zap-scan:
       uses: button-inc/gh-actions/.github/workflows/scan-code-owasp-zap.yml@develop
       with:
         target-url: 'http://localhost:3000'
-
-      
-    

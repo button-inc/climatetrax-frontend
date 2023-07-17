@@ -12,3 +12,37 @@
 {"timestamp":"2023-06-29T15:04:23.339Z","type":"upload","error":"Error: unsupported file type"}
 {"timestamp":"2023-06-29T15:11:36.700Z","type":"upload","error":"unsupported"}
 {"timestamp":"2023-06-29T15:13:01.317Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-05T17:14:14.966Z","type":"upload","error":"Failed to upload file. Error: Shon.Hogan@gmail.com does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist)."}
+{"timestamp":"2023-07-05T17:20:05.277Z","type":"upload","error":"Failed to upload file. Error: Shon.Hogan@gmail.com does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist)."}
+{"timestamp":"2023-07-17T19:33:17.347Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:33:48.083Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:34:18.816Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:34:55.469Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:35:26.255Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:35:56.784Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:40:12.523Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:40:43.196Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:41:13.711Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:41:45.857Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:42:16.689Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:42:47.191Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:47:04.994Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:47:35.627Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:48:06.154Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:48:38.454Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:53:32.643Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:54:03.402Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:54:33.892Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:55:06.121Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T19:55:36.923Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T20:01:38.259Z","type":"upload","error":"Failed to upload file. FetchError: request to https://storage.googleapis.com/upload/storage/v1/b/eed_upload_file_storage/o?name=helloWorld.csv&uploadType=resumable failed, reason: "}
+{"timestamp":"2023-07-17T20:02:23.288Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T20:02:25.197Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T20:02:26.951Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T20:04:02.140Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T20:15:06.876Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T20:20:43.615Z","type":"upload","error":"Failed to upload file. FetchError: request to https://storage.googleapis.com/upload/storage/v1/b/eed_upload_file_storage/o?name=helloWorld.json&uploadType=resumable failed, reason: "}
+{"timestamp":"2023-07-17T20:21:22.858Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T20:24:31.261Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-17T20:58:08.669Z","type":"upload","error":"Failed to upload file. FetchError: request to https://storage.googleapis.com/upload/storage/v1/b/eed_upload_file_storage/o?name=helloWorld.xlsx&uploadType=resumable failed, reason: "}
+{"timestamp":"2023-07-17T20:58:41.189Z","type":"upload","error":"unsupported"}
