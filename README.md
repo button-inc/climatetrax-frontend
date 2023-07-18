@@ -218,10 +218,7 @@ Linux/Mac: export GOOGLE_APPLICATION_CREDENTIALS=/path/to/keyfile.json
 export GOOGLE_APPLICATION_CREDENTIALS=credentials/service-account-key-gcs.json
 ```
 
-**Note**: Storing a service account key file fro GCS within the file directory credentials/service-account-key-gcs.json, while not considered a best practice, has been done for convenience and ease of team collaboration, local GCP auth setup, and testing by using scripts to export the service account from the credential folder.
-**Example**: see package.json\scripts\dev for an example of setting the GAC before starting the dev server
-
-While this approach does provide convenience during local development and testing, it's important to handle sensitive credentials securely to protect against unauthorized access or exposure by using proper file permissions and preventing commit to GitHUb via the .gitignore file.
+**Note**: see package.json\scripts\dev for an example of setting the GAC before starting the dev server. You will need to set .env.development\GAC_EXPORT value to the value of the service account key location. Example: GAC_EXPORT="export GOOGLE_APPLICATION_CREDENTIALS=/credentials/service-account-key-gcs.json"
 
 To echo the value of the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable in a terminal you can use the following command:
 
