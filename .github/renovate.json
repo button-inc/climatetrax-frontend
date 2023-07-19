@@ -29,6 +29,11 @@
         "description": "Use ci semantic type for some deps",
         "matchFileNames": [".github/workflows/**"],
         "semanticCommitType": "ci"
+      },
+      {
+        "matchDatasources": ["github-tags"],
+        "matchPackageNames": ["button-inc/gh-actions"],
+        "versioning": "semver"
       }
     ],
     "regexManagers": [
@@ -48,9 +53,10 @@
       },
       {
         "fileMatch": [
-            "^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$",
-            "(^|/)[^/]+\\.ya?ml$"
-          ]
+          "^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$",
+          "(^|/)[^/]+\\.ya?ml$"
+        ]
       }
     ]
   }
+  
