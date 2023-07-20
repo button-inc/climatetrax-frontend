@@ -1,81 +1,90 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["github>renovatebot/.github", ":pinDependencies"],
-    "repositories": ["button-inc/gh-actions", "button-inc/climatetrax-frontend"],
-    "autodiscover": true,
-    "packageRules": [
-      {
-        "description": "Update references in Markdown files weekly",
-        "matchFileNames": ["**/*.md"],
-        "extends": ["schedule:weekly"],
-        "automerge": true,
-        "minimumReleaseAge": null,
-        "separateMajorMinor": false,
-        "commitMessageTopic": "references to {{{depName}}}",
-        "semanticCommitType": "docs",
-        "semanticCommitScope": null,
-        "additionalBranchPrefix": "docs-"
-      },
-      {
-        "description": "Use build semantic type for some deps",
-        "matchPackageNames": [
-          "@vercel/ncc",
-          "conventional-changelog-conventionalcommits",
-          "semantic-release",
-          "typescript"
-        ],
-        "matchPackagePrefixes": ["@semantic-release/"],
-        "semanticCommitType": "build"
-      },
-      {
-        "description": "Use ci semantic type for some deps",
-        "matchFileNames": [".github/workflows/**"],
-        "semanticCommitType": "ci"
-      },
-      {
-        "matchDatasources": ["github-tags"],
-        "matchPackageNames": ["button-inc/gh-actions"],
-        "versioning": "semver"
-      },
-      {
-        "description": "Update GitHub Actions workflows",
-        "matchFileNames": [".github/workflows/**"],
-        "matchDatasources": ["github-tags"]
-      }
-    ],
-    "regexManagers": [
-      {
-        "fileMatch": ["^README\\.md$"],
-        "matchStrings": [
-          "uses: renovatebot/github-action@(?<currentValue>[^\\s]+)"
-        ],
-        "depNameTemplate": "renovatebot/github-action",
-        "datasourceTemplate": "github-releases"
-      },
-      {
-        "fileMatch": ["^README\\.md$"],
-        "matchStrings": ["renovate-version: (?<currentValue>[^\\s]+)"],
-        "depNameTemplate": "ghcr.io/renovatebot/renovate",
-        "datasourceTemplate": "docker"
-      },
-      {
-        "fileMatch": [
-          "^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$",
-          "(^|/)[^/]+\\.ya?ml$"
-        ]
-      },
-      {
-        "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
-        "matchStrings": ["uses: button-inc/gh-actions/.github/workflows/test-code-playwright.yml@(?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
-        "depNameTemplate": "button-inc/gh-actions",
-        "datasourceTemplate": "github-tags"
-      },
-      {
-        "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
-        "matchStrings": ["uses: actions/checkout@(?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
-        "depNameTemplate": "actions/checkout",
-        "datasourceTemplate": "github-tags"
-      }      
-    ]
-  }
-  
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>renovatebot/.github", ":pinDependencies", "helpers:pinGitHubActionDigests"],
+  "repositories": ["button-inc/gh-actions", "button-inc/climatetrax-frontend"],
+  "autodiscover": true,
+  "packageRules": [
+    {
+      "description": "Update references in Markdown files weekly",
+      "matchFileNames": ["**/*.md"],
+      "extends": ["schedule:weekly"],
+      "automerge": true,
+      "minimumReleaseAge": null,
+      "separateMajorMinor": false,
+      "commitMessageTopic": "references to {{{depName}}}",
+      "semanticCommitType": "docs",
+      "semanticCommitScope": null,
+      "additionalBranchPrefix": "docs-"
+    },
+    {
+      "description": "Use build semantic type for some deps",
+      "matchPackageNames": [
+        "@vercel/ncc",
+        "conventional-changelog-conventionalcommits",
+        "semantic-release",
+        "typescript"
+      ],
+      "matchPackagePrefixes": ["@semantic-release/"],
+      "semanticCommitType": "build"
+    },
+    {
+      "description": "Use ci semantic type for some deps",
+      "matchFileNames": [".github/workflows/**"],
+      "semanticCommitType": "ci"
+    },
+    {
+      "matchDatasources": ["github-tags"],
+      "matchPackageNames": ["button-inc/gh-actions"],
+      "versioning": "semver"
+    },
+    {
+      "description": "Update GitHub Actions workflows",
+      "matchFileNames": [".github/workflows/**"],
+      "matchDatasources": ["github-tags"]
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["^README\\.md$"],
+      "matchStrings": [
+        "uses: renovatebot/github-action@(?<currentValue>[^\\s]+)"
+      ],
+      "depNameTemplate": "renovatebot/github-action",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "fileMatch": ["^README\\.md$"],
+      "matchStrings": ["renovate-version: (?<currentValue>[^\\s]+)"],
+      "depNameTemplate": "ghcr.io/renovatebot/renovate",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "fileMatch": [
+        "^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$",
+        "(^|/)[^/]+\\.ya?ml$"
+      ],
+      "depNameTemplate": "actions/{{depName}}",
+      "datasourceTemplate": "github-tags"
+    },
+    {
+      "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
+      "matchStrings": ["uses: button-inc/gh-actions/.github/workflows/test-code-playwright.yml@(?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
+      "depNameTemplate": "button-inc/gh-actions",
+      "datasourceTemplate": "github-tags"
+    },
+    {
+      "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
+      "matchStrings": ["uses: actions/checkout@(?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
+      "depNameTemplate": "actions/checkout",
+      "datasourceTemplate": "github-tags"
+    },
+    {
+      "fileMatch": [
+        "^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$",
+        "(^|/)action\\.ya?ml$"
+      ],
+      "depNameTemplate": "actions/{{depName}}",
+      "datasourceTemplate": "github-tags"
+    }
+  ]
+}
