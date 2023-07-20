@@ -1,6 +1,7 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": ["github>renovatebot/.github", ":pinDependencies"],
+    "repositories": ["button-inc/gh-actions", "button-inc/climatetrax-frontend"],
     "packageRules": [
       {
         "description": "Update references in Markdown files weekly",
