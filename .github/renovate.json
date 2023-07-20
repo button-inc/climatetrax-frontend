@@ -34,6 +34,11 @@
         "matchDatasources": ["github-tags"],
         "matchPackageNames": ["button-inc/gh-actions"],
         "versioning": "semver"
+      },
+      {
+        "description": "Update GitHub Actions workflows",
+        "matchFileNames": [".github/workflows/**"],
+        "matchDatasources": ["github-tags"]
       }
     ],
     "regexManagers": [
@@ -56,7 +61,13 @@
           "^(workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$",
           "(^|/)[^/]+\\.ya?ml$"
         ]
-      }
+      },
+      {
+        "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
+        "matchStrings": ["uses: button-inc/gh-actions/.github/workflows/test-code-playwright.yml@(?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
+        "depNameTemplate": "button-inc/gh-actions",
+        "datasourceTemplate": "github-tags"
+      }      
     ]
   }
   
