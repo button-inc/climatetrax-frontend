@@ -69,6 +69,12 @@
         "matchStrings": ["uses: button-inc/gh-actions/.github/workflows/test-code-playwright.yml@(?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
         "depNameTemplate": "button-inc/gh-actions",
         "datasourceTemplate": "github-tags"
+      },
+      {
+        "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
+        "matchStrings": ["uses: actions/checkout@(?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
+        "depNameTemplate": "actions/checkout",
+        "datasourceTemplate": "github-tags"
       }      
     ]
   }
