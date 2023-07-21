@@ -218,7 +218,7 @@ Linux/Mac: export GOOGLE_APPLICATION_CREDENTIALS=/path/to/keyfile.json
 export GOOGLE_APPLICATION_CREDENTIALS=credentials/service-account-key-gcs.json
 ```
 
-**Note**: see package.json\scripts\dev for an example of setting the GAC before starting the dev server. You will need to set .env.development\GAC_EXPORT value to the value of the service account key location. Example: GAC_EXPORT="export GOOGLE_APPLICATION_CREDENTIALS=/credentials/service-account-key-gcs.json"
+**Note**: see package.json\scripts\dev for an example of setting the GAC before starting the dev server. You will need to set .env.development\GAC_EXPORT value to the value of the [service account](https://console.cloud.google.com/iam-admin/serviceaccounts/details/106707473171516793046?project=emissions-elt-demo) key location. Example: GAC_EXPORT="export GOOGLE_APPLICATION_CREDENTIALS=/credentials/service-account-key-gcs.json"
 
 To echo the value of the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable in a terminal you can use the following command:
 

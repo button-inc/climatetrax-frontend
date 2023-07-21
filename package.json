@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "echo $GAC_EXPORT && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:codegen": "echo $GAC_EXPORT && npx playwright codegen",
+    "test:codegen": "npx playwright codegen",
     "test:e2e": "playwright test",
     "test:i18n": "playwright test tests/i18n",
-    "test:gcs": "echo $GAC_EXPORT && playwright test tests/gcs",
-    "k8s": "minikube start && scripts/k8s-secrets.sh && scripts/k8s-launch.sh",
+    "test:gcs": "scripts/tests/test-gcs.sh",
+    "k8s": "minikube start && scripts/k8s-secrets.sh",
     "tailwind:watch": "postcss tailwind.css -o styles.css -w"
   },
   "dependencies": {
