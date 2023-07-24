@@ -146,3 +146,11 @@
 {"timestamp":"2023-07-21T14:37:35.447Z","type":"upload","error":"Failed to upload file. SyntaxError: Unexpected token 'e', \"ewogICJ0eX\"... is not valid JSON"}
 {"timestamp":"2023-07-21T14:48:15.418Z","type":"upload","error":"Failed to upload file. SyntaxError: Unexpected token 'e', \"ewogICJ0eX\"... is not valid JSON"}
 {"timestamp":"2023-07-21T14:49:56.922Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-07-24T14:36:02.418Z","type":"upload","error":"Failed to upload file. SyntaxError: Unexpected token 'e', \"ewogICJ0eX\"... is not valid JSON"}
+{"timestamp":"2023-07-24T14:36:32.895Z","type":"upload","error":"Failed to upload file. SyntaxError: Unexpected token 'e', \"ewogICJ0eX\"... is not valid JSON"}
+{"timestamp":"2023-07-24T14:37:58.904Z","type":"upload","error":"Failed to upload file. SyntaxError: Unexpected token 'e', \"ewogICJ0eX\"... is not valid JSON"}
+{"timestamp":"2023-07-24T14:38:29.609Z","type":"upload","error":"Failed to upload file. SyntaxError: Unexpected token 'e', \"ewogICJ0eX\"... is not valid JSON"}
+{"timestamp":"2023-07-24T14:50:12.789Z","type":"upload","error":"Failed to upload file. SyntaxError: Unexpected end of JSON input"}
+{"timestamp":"2023-07-24T14:50:43.418Z","type":"upload","error":"Failed to upload file. SyntaxError: Unexpected end of JSON input"}
+{"timestamp":"2023-07-24T14:51:14.148Z","type":"upload","error":"Failed to upload file. SyntaxError: Unexpected end of JSON input"}
+{"timestamp":"2023-07-24T15:01:08.578Z","type":"upload","error":"unsupported"}

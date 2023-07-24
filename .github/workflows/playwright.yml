@@ -1,20 +1,11 @@
-# Name of the GitHub Actions workflow
 name: Playwright Tests
 
-# Trigger the workflow on 'push' event
 on: [push]
 
-# Concurrency options for the workflow
 concurrency:
-  # Define the concurrency group for the workflow with placeholders
   group: CT-caller-${{ github.workflow }}-${{ github.ref }}
-  # If a workflow with the same concurrency group is already in progress, cancel it
   cancel-in-progress: true
 
-# Define the jobs that will be executed as part of the workflow
 jobs:
-  # Job to call and execute the 'test-code-playwright.yml' workflow
   call-workflow-playwright-test:
-    # Use a reusable GitHub Actions workflow from the 'button-inc/gh-actions' repository
-    # and the file 'test-code-playwright.yml' in the 'develop' branch
-    uses: button-inc/gh-actions/.github/workflows/test-code-playwright.yml@develop
+    uses: button-inc/gh-actions/.github/workflows/test-code-playwright.yml@v0.0.1
