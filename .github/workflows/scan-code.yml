@@ -8,16 +8,16 @@ concurrency:
 
 jobs:
     call-workflow-trivy-scan:
-      uses: button-inc/gh-actions/.github/workflows/scan-code-trivy.yml@v0.0.1
+      uses: button-inc/gh-actions/.github/workflows/scan-code-trivy.yml@v0.1.0
       
     call-workflow-husky-scan:
-      uses: button-inc/gh-actions/.github/workflows/scan-code-husky.yml@v0.0.1
+      uses: button-inc/gh-actions/.github/workflows/scan-code-husky.yml@v0.1.0
       with:
         working-directory: ./app
         node-version: '18' 
 
     call-workflow-gitleaks-scan:
-      uses: button-inc/gh-actions/.github/workflows/scan-code-gitleaks.yml@v0.0.1
+      uses: button-inc/gh-actions/.github/workflows/scan-code-gitleaks.yml@v0.1.0
       with:
         notify-user-list: "@shon-button,@YaokunLin"
       secrets:
@@ -25,9 +25,10 @@ jobs:
         gitleaks-license: ${{ secrets.GITLEAKS_LICENSE}}
     
     call-workflow-owasp-zap-scan:
-      uses: button-inc/gh-actions/.github/workflows/scan-code-owasp-zap.yml@v0.0.1
+      uses: button-inc/gh-actions/.github/workflows/scan-code-owasp-zap.yml@v0.1.0
       with:
         target-url: 'http://localhost:3000'
+        package-manager: 'pnpm'
 
       
     
