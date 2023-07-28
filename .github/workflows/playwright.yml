@@ -9,3 +9,5 @@ concurrency:
 jobs:
   call-workflow-playwright-test:
     uses: button-inc/gh-actions/.github/workflows/test-code-playwright.yml@v0.0.1
+    with:
+      package-manager: 'pnpm'
