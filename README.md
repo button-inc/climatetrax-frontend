@@ -315,7 +315,8 @@ Testing GCS file upload:
 pnpm run test:gcs
 ```
 
-**Note**: `pnpm run test:gcs` will run a script `scripts/tests/test-gcs.sh` that configures GOOGLE_APPLICATION_CREDENTIALS from service-account-key.json information stored as a string in `scripts\tests\.env`
+**Note**: `pnpm run test:gcs` will run a script `scripts/tests/test-gcs.sh` that configures GOOGLE_APPLICATION_CREDENTIALS from service-account-key.json information stored as a stringify JSON object in `scripts\tests\.env`, for use of the [service account](https://console.cloud.google.com/iam-admin/serviceaccounts/details/106707473171516793046?project=emissions-elt-demo) permisions for GCS authentication.
+
 
 ## Running App Locally
 
