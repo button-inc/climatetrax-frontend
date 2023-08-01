@@ -6,7 +6,7 @@ import {
   BrowserContext,
   Page,
 } from "@playwright/test";
-import { fallbackLng } from "../../../app/i18n/settings";
+import { fallbackLng } from "../../app/i18n/settings";
 import {
   EN_WELCOME_MSG,
   FR_WELCOME_MSG,
