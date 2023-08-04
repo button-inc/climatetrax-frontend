@@ -19,6 +19,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="$TEMP_FILE"
 npm run build
 
 # Start the Next.js application in production mode
+# For production mode, ensure a root .env file exists with the NEXTAUTH_SECRET to prevent error:  [next-auth][error][NO_SECRET] https://next-auth.js.org/errors#no_secret Please define a `secret` in production. MissingSecret [MissingSecretError]: Please define a `secret` in production.
 npm run start &
 
 # Wait for a few seconds to ensure the Next.js application is ready

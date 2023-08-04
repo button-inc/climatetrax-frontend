@@ -154,3 +154,55 @@
 {"timestamp":"2023-07-24T14:50:43.418Z","type":"upload","error":"Failed to upload file. SyntaxError: Unexpected end of JSON input"}
 {"timestamp":"2023-07-24T14:51:14.148Z","type":"upload","error":"Failed to upload file. SyntaxError: Unexpected end of JSON input"}
 {"timestamp":"2023-07-24T15:01:08.578Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-08-04T14:14:19.273Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:14:49.814Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:15:20.561Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:15:51.410Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:16:22.019Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:16:52.824Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:17:23.485Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:17:54.293Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:18:24.798Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:18:55.596Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:19:26.319Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:19:56.977Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:20:27.762Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:20:58.271Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:21:29.143Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:21:59.866Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:22:30.632Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:23:01.400Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:23:32.016Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:24:02.746Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:24:33.287Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:25:04.076Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:25:34.613Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:26:05.259Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:26:36.133Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:27:06.905Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:27:37.443Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:28:08.119Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:28:39.001Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:29:09.734Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:29:40.527Z","type":"upload","error":"unsupported"}
+{"timestamp":"2023-08-04T14:31:56.370Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:32:27.051Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:32:57.966Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:33:28.444Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:33:59.138Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:34:30.087Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:35:00.549Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:35:31.296Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:36:02.165Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:36:32.916Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:37:03.643Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:37:34.348Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:38:04.849Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:38:35.465Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:39:06.384Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:39:37.146Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:40:07.844Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:40:38.347Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:41:09.160Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:42:13.000Z","type":"upload","error":"Failed to upload file. Error: A bucket name is needed to use Cloud Storage."}
+{"timestamp":"2023-08-04T14:46:23.694Z","type":"upload","error":"unsupported"}
