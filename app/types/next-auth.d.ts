@@ -12,19 +12,19 @@ declare module "next-auth" {
   interface Session {
     user: {
       // 👇️ Module augmentation to add 'role' definition to the Session object
-      role?: string;
+      role?: string | any;
     } & DefaultSession["user"];
   }
 }
 declare module "next-auth" {
   interface User {
     // 👇️ Module augmentation to add 'role' definition to the User object
-    role: string;
+    role?: string | any;
   }
 }
 declare module "next-auth/jwt" {
   // 👇️ Module augmentation to add 'role' definition to the JWT
   interface JWT {
-    role?: string;
+    role?: string | any;
   }
 }

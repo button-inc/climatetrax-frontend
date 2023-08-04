@@ -3,21 +3,9 @@ import { RouteItem } from "@/types/declarations";
 
 export const routes: RouteItem[] = [
   {
-    button: "home.routes.anonymized.button",
-    content: "home.routes.anonymized.content",
-    href: "anonymized",
-    title: "home.routes.anonymized.title",
-  },
-  {
     button: "home.routes.insight.button",
     content: "home.routes.insight.content",
-    href: "insight",
+    href: "test",
     title: "home.routes.insight.title",
-  },
-  {
-    button: "home.routes.analytic.button",
-    content: "home.routes.analytic.content",
-    href: "analytic",
-    title: "home.routes.analytic.title",
   },
 ];

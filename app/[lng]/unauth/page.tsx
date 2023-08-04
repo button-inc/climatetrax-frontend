@@ -1,12 +1,11 @@
-"use client";
-import { useTranslation } from "@/i18n/client";
+import { useTranslation } from "@/i18n";
 
-export default function Page() {
-  // 👇️ client language management
-  const { t } = useTranslation("translation");
+export default async function Page() {
+  // 👇️ language management
+  const { i18n } = await useTranslation();
   return (
     <>
-      <h1>⛔️ {t("messages.errors.unauth")}</h1>
+      <p> {i18n.t("messages.errors.unauth")}</p>
     </>
   );
 }

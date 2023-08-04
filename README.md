@@ -183,7 +183,11 @@ See [NextAuth.js repo](https://github.com/nextauthjs/next-auth) to learn more.
 
 Within ClimateTrax, the next-auth functionality lies within folder `app\api\[...nextauth]\route.ts` and is managed within `middleware.ts` and `middlewares\withAuthorization.ts`
 
-## `GOOGLE_APPLICATION_CREDENTIALS`
+## postgraphile
+
+WIP
+
+## Authenticating with GCP
 
 The `GOOGLE_APPLICATION_CREDENTIALS` environment variable is used by various Google Cloud client libraries and command-line tools to authenticate and authorize access to Google Cloud services. It specifies the path to the service account key file, also known as the Application Default Credentials (ADC) file.
 
@@ -208,10 +212,10 @@ To set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable within Visu
 
 1. Set the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable in a terminal you can use the following command:
 
-Linux/Mac:
+Linux/Mac: export GOOGLE_APPLICATION_CREDENTIALS=/path/to/keyfile.json
 
 ```
-export GOOGLE_APPLICATION_CREDENTIALS=/path/to/keyfile.json
+export GOOGLE_APPLICATION_CREDENTIALS=credentials/service-account-key-gcs.json
 ```
 
 To echo the value of the **`GOOGLE_APPLICATION_CREDENTIALS`** environment variable in a terminal you can use the following command:
@@ -247,6 +251,72 @@ On Linux or macOS:
 
 5. Save the file.
 6. Restart your terminal or run the `source` command to reload the environment variables in your current session.
+
+## Testing
+
+### Playwright
+
+[Playwright](https://playwright.dev/) is a powerful browser automation library that allows you to control web browsers programmatically.
+Playwright comes with the ability to generate tests out of the box and is a great way to quickly get started with testing.
+
+**Creating tests**
+
+You can run codegen and perform actions in the browser recorded as test scripts. Codegen will open two windows, a browser window where you interact with the website you wish to test and the Playwright Inspector window where you can record your tests, copy the tests, clear your tests as well as change the language of your tests. Playwright will generate the code for the user interactions. Codegen will look at the rendered page and figure out the recommended locator, prioritizing role, text and test id locators. If the generator identifies multiple elements matching the locator, it will improve the locator to make it resilient and uniquely identify the target element, therefore eliminating and reducing test(s) failing and flaking due to locators.
+
+Use the codegen command to run the test generator followed by the URL of the website you want to generate tests for. The URL is optional and you can always run the command without it and then add the URL directly into the browser window instead.
+
+```
+npx playwright codegen http://localhost:3000/
+```
+
+You can also write tests manually following these suggested best practices:
+
+1. Use the right browser context: Playwright provides three browser options: `chromium`, `firefox`, and `webkit`. Choose the browser that best suits your needs in terms of features, performance, and compatibility.
+
+2. Close browser instances: Always close the browser instances and associated resources using the `close()` method. Failing to close the browser can lead to memory leaks and unexpected behavior.
+
+3. Reuse browser contexts: Reusing browser contexts can improve performance. Instead of creating a new context for each new page, consider creating a shared context and reusing it across multiple pages.
+
+4. Use the `waitFor` methods: Playwright offers `waitFor` methods (e.g., `waitForSelector`, `waitForNavigation`) that allow you to wait for specific conditions before proceeding with further actions. This helps ensure that the page has fully loaded or the desired element is available before interacting with it.
+
+5. Emulate network conditions: Playwright allows you to emulate various network conditions, such as slow connections or offline mode, using the `context.route` and `context.routeOverride` methods. This can be helpful for testing how your application behaves under different network scenarios.
+
+6. Handle errors and timeouts: Playwright operations can sometimes fail due to network issues, element unavailability, or other reasons. Properly handle errors and timeouts by using `try-catch` blocks and setting appropriate timeout values for operations like navigation or element waiting.
+
+7. Use `click` and `type` with caution: While using `click` and `type` methods, make sure to target the correct element and account for any potential delays caused by JavaScript events or animations on the page.
+
+8. Configure viewport and device emulation: Playwright allows you to set the viewport size and emulate different devices using the `page.setViewportSize` and `page.emulate` methods. Adjusting the viewport and device emulation can help test the responsiveness of your application.
+
+9. Use selective screenshotting: Capture screenshots strategically to minimize resource usage. Avoid taking excessive screenshots or capturing unnecessary parts of the page unless required for debugging or reporting.
+
+10. Run in headless mode: Consider running Playwright in headless mode (`headless: true`) for improved performance and resource utilization, especially in production or non-visual testing scenarios.
+
+11. Follow Playwright documentation: Playwright has comprehensive documentation with detailed guides, examples, and API references. Consult the official Playwright documentation (https://playwright.dev/) for specific use cases, best practices, and updates.
+
+**Running tests**
+
+Running tests can be completed using the package.json\scripts as follows:
+
+Testing end to end:
+
+```
+pnpm run test:e2e
+```
+
+Testing i18n:
+
+```
+pnpm run test:i18n
+```
+
+Testing GCS file upload:
+
+```
+pnpm run test:gcs
+```
+
+**Note**: `pnpm run test:gcs` will run a script `scripts/tests/test-gcs.sh` that configures GOOGLE_APPLICATION_CREDENTIALS from service-account-key.json information stored as a stringify JSON object in `scripts\tests\.env`, for use of the [service account](https://console.cloud.google.com/iam-admin/serviceaccounts/details/106707473171516793046?project=emissions-elt-demo) permisions for GCS authentication.
+
 
 ## Running App Locally
 
@@ -359,5 +429,3 @@ pnpm run k8s
 ```
 
 The output of `k8s` will be displayed in the terminal to confirm failure or success of setting a Kubernetes secret using shell "scripts\k8s-secrets.sh"; after which, Cloud Code\Run Kubernetes should launch
-
-<img alt="gitleaks badge" src="https://img.shields.io/badge/protected%20by-gitleaks-blue">

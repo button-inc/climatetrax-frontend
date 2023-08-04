@@ -19,8 +19,18 @@ export const withAuthorization: MiddlewareFactory = (next: NextMiddleware) => {
 
     // 👇️ vars for route management
     const { pathname } = request.nextUrl;
+    const isRouteGraphQL = pathname.indexOf("api/postgraph") > -1;
     const isRouteAuth =
       pathname.indexOf("/auth") > -1 || pathname.indexOf("/unauth") > -1;
+
+    // 👇️ check calls to graphql
+    if (isRouteGraphQL === true) {
+      // 👀 dev only
+      if (process.env.API_HOST == "http://localhost:3000/") {
+        // 👉️ OK: route all postgraphile routes
+        return NextResponse.next();
+      }
+    }
 
     // 👇️ check if authentication route
     if (isRouteAuth === true) {
@@ -35,14 +45,14 @@ export const withAuthorization: MiddlewareFactory = (next: NextMiddleware) => {
       // 👉️ return response
       NextResponse.next();
     } else {
-      // 👇️ vars for user session details via next-auth getToken to decrypt jwt in request cookie
-      const session = await getToken({
+      // 👇️ vars for user token details via next-auth getToken to decrypt jwt in request cookie
+      const token = await getToken({
         req: request,
         secret: process.env.NEXTAUTH_SECRET,
       });
-      const role = session?.role ? session?.role : "analyst"; // 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨 🚨;
+      const role = token?.role;
 
-      if (session && role) {
+      if (token && role) {
         // 👉️ OK: authenticated and authorized role
 
         // 👇️ validate routes properties

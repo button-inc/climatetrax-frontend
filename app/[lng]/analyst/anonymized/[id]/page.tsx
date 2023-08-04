@@ -7,13 +7,10 @@ export default function Page({
     id: string;
   };
 }) {
-  // 👇️ graphQL query endpoint for this role
-  const endpoint = "api/analyst/graphql";
-
   return (
     <>
       {/* @ts-expect-error Server Component */}
-      <AnonymizedArea id={params.id} endpoint={endpoint}></AnonymizedArea>
+      <AnonymizedArea id={params.id}></AnonymizedArea>
     </>
   );
 }

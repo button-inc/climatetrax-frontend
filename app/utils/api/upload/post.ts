@@ -64,18 +64,19 @@ export default async function handler(request: NextRequest) {
       // 👇️ check file type
       const fileType = uploadedFile.type;
       let isValidFileType = false;
-
+      console.log(fileType);
       switch (fileType) {
         case "application/json":
         case "application/vnd.ms-excel":
         case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+        case "application/xml":
         case "text/csv":
         case "text/xml":
-          // 👍
+          // 👍 yes
           isValidFileType = true;
           break;
         default:
-          // 👎
+          // 👎 no
           success = false;
           break;
       }

@@ -13,15 +13,7 @@ export const menu: MenuItem[] = [
     button: "home.routes.home.button",
   },
   {
-    href: `${baseUrl}anonymized`,
-    button: "home.routes.anonymized.button",
-  },
-  {
-    href: `${baseUrl}insight`,
+    href: `${baseUrl}test`,
     button: "home.routes.insight.button",
-  },
-  {
-    href: `${baseUrl}analytic`,
-    button: "home.routes.analytic.button",
   },
 ];

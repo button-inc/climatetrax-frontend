@@ -25,9 +25,11 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# local env files
-.env*.local
-.env.*
+# all env files except .env.example
+**/.env
+**/.env.development
+!**/.env.example
+
 
 # vercel
 .vercel
@@ -43,3 +45,7 @@ next-env.d.ts
 # keycloak
 keycloak-sa-credential.json
 emissions-elt-demo-ecc9c7e27bf4.json
+
+# playwright
+/tests/.env
+playwright/.auth/user.json

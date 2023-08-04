@@ -1,3 +1,4 @@
+import { getSessionRoleEndpoint } from "@/utils/postgraphile/helpers";
 import { Suspense } from "react";
 import { gql } from "graphql-request";
 import Spinner from "@/components/common/Spinner";
@@ -11,7 +12,10 @@ import dynamic from "next/dynamic";
 const Tag = dynamic(() => import("@/components/layout/Tag"), {
   ssr: false,
 });
-export default async function Page({ id, endpoint }: GraphqlParamEndPoint) {
+export default async function Page({ id }: GraphqlParamEndPoint) {
+  // 👇️ role base graphQL api route
+  const endpoint = await getSessionRoleEndpoint();
+
   // 👇️ graphQL query
   const query =
     gql`
